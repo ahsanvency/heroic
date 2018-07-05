@@ -1,0 +1,109 @@
+<% include ../../partials/header/ %>
+
+<form id="journalingTemplate">
+
+		<form id="basicTemplate">
+
+			<h4>Three significant things that happened today and why they happened</h4>
+
+			<p></p>
+			<label for="first">Number 1</label>
+			<div></div>
+			<textarea class= "journalingInput" id="first" name="Text1"></textarea>
+			<p></p>
+
+			<label for="second">Number 2</label>
+			<div></div>
+			<textarea class= "journalingInput" id="second" name="Text2"></textarea>
+			<p></p>
+
+			<label for="third">Number 3</label>
+			<div></div>
+			<textarea class= "journalingInput" id="third" name="Text3"></textarea>
+			<p></p>
+		</form>
+
+		<div id="container">
+
+			<div id="healthyContainer">
+				<span>X</span>
+				<h1>Healthy Lifestyle & Habits</h1>
+
+				<!-- <input type="text" name="" placeholder="Enter New Item"> -->
+				
+				<div><input type="checkbox" name="Eat Healthy" id="eatHealthy"> <label for="eatHealthy">Eat Healthy</label>  <span>X</span></div>
+
+				<div><input type="checkbox" name="Exercise Well" id="exerciseWell"> <label for="exerciseWell">Exercise Well</label> <span>X</span></div>
+
+				<div><input type="checkbox" name="Sleep Correctly" id="sleepCorrectly"> <label for="sleepCorrectly">Sleep Correctly</label> <span>X</span></div>
+			</div>
+
+			<div id="threeGratitudesContainer">
+				<h1>3 Gratitudes</h1>
+		
+				<div><label for="firstGratitude">1.</label>  <input type="text" name="" id="firstGratitude"></div>
+				<div><label for="secondGratitude">2.</label> <input type="text" name="" id="secondGratitude"></div>
+				<div><label for="thirdGratitude">3.</label> <input type="text" name="" id="thirdGratitude"></div>
+			</div>
+
+			<div id="todoListContainer">
+				<h1>Todo List for Tomorrow</h1>
+
+
+				<h4>Imp Urg</h4>
+				<div><span>X</span> <input type="radio" name="firstTodo"> <input type="radio" name="firstTodo"> <input type="text" name="" id="firstTodo"></div>
+				<div><span>X</span> <input type="radio" name="secondTodo"> <input type="radio" name="secondTodo"> <input type="text" name="" id="secondTodo"></div>
+				<div><span>X</span> <input type="radio" name="thirdTodo"> <input type="radio" name="thirdTodo"> <input type="text" name="" id="thirdTodo"></div>
+				<div><span>X</span> <input type="radio" name="fourthTodo"> <input type="radio" name="fourthTodo"> <input type="text" name="" id="fourthTodo"></div>
+				<div><span>X</span> <input type="radio" name="fifthTodo"> <input type="radio" name="fifthTodo"> <input type="text" name="" id="fifthTodo"></div>
+
+			</div>
+			
+		</div>
+
+
+		
+
+		<p></p>
+
+		<label class="addJournalingLabel" for="journalingSelector">Add parts to your journaling template here:  </label>
+		<select id="journalingSelector" name="journalingOptions" onchange="getValue();">
+			<option value="default" title="Select Journaling Addition">Select Journaling Addition</option>
+			<!-- <option value="healthyHabits" title="Healthy Habits">Healthy Habits</option> -->
+			<option value="threeGratitudes" title="3 Gratitudes">3 Gratitudes</option>
+			<option value="threeKindess" title="3 Acts of Kindness">3 Acts of Kindness</option>
+			<option value="threeLessons" title="3 Lessons">3 Lessons</option>
+			<option value="todoList" title="Todo List">Todo List</option>
+
+		</select>
+
+		<p></p>
+
+		<div class="btn-group happinessScale">
+	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/1.png"></button>
+	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/2.png"></button>
+	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/3.png"></button>
+	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/4.png"></button>
+	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/5.png"></button>
+	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/6.png"></button>
+	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/7.png"></button>
+	  	</div>
+
+  	</form>
+
+  	<p></p>
+
+  	<p>The first part—the top half—allows you to indicate whether you have aches or pains in any part(s) of your body. Keeping a daily record of the aches and pains will help you figure out how long and how intensely you have had a particular ache (e.g., in the bottom of your foot). This, in turn, can help—or your doctor—diagnose health problems.</p>
+
+  	<p>The second part—the bottom half—allows you to keep a record of the set of “daily activities”. These are activities that you would like to include in your lifestyle. For example, Raj’s healthy lifestyle includes not just eating healthy, exercising for at least 20 minutes and sleeping well (for 7 hours), but also includes taking supplements, and being productive at work among other things. The part—the very bottom—allows you to record some vitalstatistics, like your blood pressure, fat % and any other important stats you might want to record.</p>
+
+  	<p>The 2nd page of the journal focuses mainly on your emotional life. This page has four parts. The first part—the top half—allows you to write about the most significant things that happened in your life today. This is the most important part of the journal, the part that you definitely need to complete each day in order to earn credits for the course. </p>
+
+  	<p>The second part is titled “3 good things” and is the part in which you write about 3 good—positive, uplifting—things that happened in your life today. Note that these need not be fantastically positive things; they are not likely to be. Focus on the little good things, like a child smiling at you, or arriving at a bus stop just in time, that happened in your life today.</p>
+
+  	<p>The third part is the things to do list—T2D—for tomorrow. If you can, check the “important” and “urgent” boxes so that you can prioritize the items on your list for tomorrow.</p>
+
+  	<p>The fourth and final part allows you to indicate how happy or unhappy you were today, all things considered. Was it a good or a bad day for you, emotionally? Circle the icon that best represents how you felt overall about the day.</p>
+
+	
+<% include ../../partials/footer/ %>
