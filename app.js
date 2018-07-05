@@ -1,5 +1,8 @@
-var express = require("express"),
-    app     = express()
+var express     = require("express"),
+    app         = express(),
+    mongoose    = require("mongoose")
+    
+    mongoose.connect("mongodb://localhost/heroicDB")
     
 var activityRoutes = require("./routes/activityRoutes/activitiesHome")
 var journalingRoutes = require("./routes/activityRoutes/journalingRoutes")
