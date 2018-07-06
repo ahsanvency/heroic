@@ -14,7 +14,7 @@ var activityRoutes      = require("./routes/activityRoutes/activitiesHome"),
 
 
 // mongoose.connect("mongodb://localhost:27017/heroicDB", { useNewUrlParser: true })
-mongoose.connect("mongodb://av:password1@ds127851.mlab.com:27851/heroic" , { useNewUrlParser: true });
+mongoose.connect("mongodb://av:password1@ds127851.mlab.com:27851/heroic");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs")
 
