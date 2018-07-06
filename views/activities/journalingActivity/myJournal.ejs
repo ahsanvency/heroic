@@ -1,0 +1,53 @@
+<% include ../../partials/header/ %>
+
+<h1 id="get">GET</h1>
+
+<div id="chosenJournalingContainer"></div>
+
+<script>
+
+var myArray =[]
+
+// $(document).ready(function(){
+//     var myArray = sessionStorage.getItem('myArray');
+    
+//     if (myArray === undefined || myArray.length == 0){
+        
+//     }else{
+//         alert(myArray);
+//     }
+// });
+
+    $('#get').on('click', function(){
+     myArray = JSON.parse(sessionStorage.getItem("theArray"));
+    //  myArray = sessionStorage.getItem('theArray');
+    
+    if (myArray != undefined && myArray.length > 0){
+        
+        for (var i = 0; i < myArray.length; i++) {
+            if(myArray[i] != null){
+                console.log(myArray[i])
+                var input = document.createElement("div");
+                input.className = "element"
+                input.innerHTML = "<li>" + myArray[i] + "</li>"
+                $('#chosenJournalingContainer').append(input)
+            }
+            
+        }
+        
+    }
+    
+//     myArray.forEach(function(journalingItem){
+//         console.log(journalingItem)
+// //         var input = document.createElement("div");
+// // 			input.className = "element"
+// // 			input.innerHTML = "<li>" + journalingItem + "</li>"
+// //         $('#chosenJournalingContainer').append(input)
+//     })
+});
+
+    
+
+
+</script>
+<% include ../../partials/footer/ %>

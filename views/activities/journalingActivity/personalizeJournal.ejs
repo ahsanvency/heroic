@@ -1,4 +1,4 @@
-<% include partials/header/ %>
+<% include ../../partials/header/ %>
 
 <h1>Personalizing Your Journal</h1>
 
@@ -13,7 +13,6 @@
 
 	<p>Below is the recommended journaling template. Certain parts can be removed and added as you wish.</p>
 	
-	<!--<a class="nav-link" href="#">Signed in as <%= currentUser.username %> </a>-->
 
 	<h3>Daily Journaling Template</h3>
 
@@ -70,9 +69,9 @@
 			<option value="default" title="Select Journaling Addition">Select Journaling Addition</option>
 			<!-- <option value="healthyHabits" title="Healthy Habits">Healthy Habits</option> -->
 			<option value="threeGratitudes" title="3 Gratitudes">3 Gratitudes</option>
-			<option value="threeKindess" title="3 Acts of Kindness">3 Acts of Kindness</option>
+			<option value="threeKindness" title="3 Acts of Kindness">3 Acts of Kindness</option>
 			<option value="threeLessons" title="3 Lessons">3 Lessons</option>
-			<option value="todoList" title="Todo List">Todo List</option>
+			<option value="toDoList" title="Todo List">Todo List</option>
 
 		</select>
 
@@ -94,15 +93,34 @@
   	</form>
   	
   	<a href="/activities/journalingHome" class="btn btn-link"><- Journaling Homepage</a>
+  	<a id="store" href="/activities/myJournal" class="btn btn-link"> See my journal -></a>
+  	<!--<a id="store" href="#" class="btn btn-link"> See my journal -></a>-->
 
 	<p></p>
 	
 	<script>
+	var testArray = ["healthyHabits", "threeGratitudes", "threeKindness", "threeLessons", "toDoList"]
+	
+	
+		
+		
+	$('#store').on('click', function(){
+		$("#journalingSelector > option").each(function() {
+			var index = testArray.indexOf($(this).val());
+			if (index >= 1) {
+				delete testArray[index]
+			}
+			console.log(testArray)
+		});
+		sessionStorage.setItem('theArray', JSON.stringify(testArray));
+	});
+	
+	
 	/* global $ */
 	   // alert("conected");
 removeItem();
 pressed();
-todoListPressed();
+toDoListPressed();
 
 
 function removeItem(){
@@ -117,13 +135,13 @@ function removeItem(){
 			$("#journalingSelector").append('<option value="threeGratitudes" title="3 Gratitudes">3 Gratitudes</option>')
 		}
 		else if(this.id === "threeKindnessContainer"){
-			$("#journalingSelector").append('<option value="threeKindess" title="3 Acts of Kindness">3 Acts of Kindness</option>')
+			$("#journalingSelector").append('<option value="threeKindness" title="3 Acts of Kindness">3 Acts of Kindness</option>')
 		}
 		else if(this.id === "threeLessonsContainer"){
 			$("#journalingSelector").append('<option value="threeLessons" title="3 Lessons">3 Lessons</option>')
 		}
-		else if(this.id === "todoListContainer"){
-			$("#journalingSelector").append('<option value="todoList" title="Todo List">Todo List</option>')
+		else if(this.id === "toDoListContainer"){
+			$("#journalingSelector").append('<option value="toDoList" title="Todo List">Todo List</option>')
 		}
 	}); //.parent gives us the parent of the span
 	event.stopPropagation();
@@ -145,7 +163,7 @@ function pressed(){
 	})
 }
 
-function todoListPressed(){
+function toDoListPressed(){
 
 	$("#container").on("keypress", "input", function(event){
 		if(event.which === 13){
@@ -154,7 +172,7 @@ function todoListPressed(){
 			var input = document.createElement("div");
 			input.className = "element"
 			input.innerHTML = '<span class="elementDelete">X</span> <input type="radio" name="fifthTodo"> <input type="radio" name="fifthTodo"> <label>' + newItem +'</label>'
-			$("#todoListContainer").append(input)
+			$("#toDoListContainer").append(input)
 	}
 	})
 }
@@ -185,10 +203,10 @@ function getValue()
   		}
 	}
 
-	else if (selectedValue === "threeKindess"){
-		container.append(createThreeKindess(selectedValue));
+	else if (selectedValue === "threeKindness"){
+		container.append(createThreeKindness(selectedValue));
 		for (var i=0; i < addJournal.length; i++){
-  			if (addJournal.options[i].value == 'threeKindess' ){
+  			if (addJournal.options[i].value == 'threeKindness' ){
   				addJournal.remove(i);
   			}
   		}
@@ -201,10 +219,10 @@ function getValue()
   			}
   		}
 	}
-	else if (selectedValue === "todoList"){
-		container.append(createTodoList(selectedValue));
+	else if (selectedValue === "toDoList"){
+		container.append(createtoDoList(selectedValue));
 		for (var i=0; i < addJournal.length; i++){
-  			if (addJournal.options[i].value == 'todoList' ){
+  			if (addJournal.options[i].value == 'toDoList' ){
   				addJournal.remove(i);
   			}
   		}
@@ -293,7 +311,7 @@ function createThreeGratitudes(selectedValue){
 }
 
 
-function createThreeKindess(selectedValue){
+function createThreeKindness(selectedValue){
 	var d = document.createElement("div")
 	d.id = "threeKindnessContainer"
 	d.className = "journalingContainer"
@@ -353,9 +371,9 @@ function createThreeLessons(selectedValue){
 	return d;
 }
 
-function createTodoList(selectedValue){
+function createtoDoList(selectedValue){
 	var d = document.createElement("div")
-	d.id = "todoListContainer"
+	d.id = "toDoListContainer"
 	d.className = "journalingContainer"
 
 
@@ -405,7 +423,7 @@ function createTodoList(selectedValue){
 
 	return d;
 
-	todoListPressed();
+	toDoListPressed();
 }
 
 // var bigTemplate = document.getElementById("journalingTemplate")
@@ -416,4 +434,4 @@ function createTodoList(selectedValue){
 
 	</script>
 
-<% include partials/footer/ %>
+<% include ../../partials/footer/ %>

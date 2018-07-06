@@ -11,7 +11,6 @@ var activityRoutes      = require("./routes/activityRoutes/activitiesHome"),
     journalingRoutes    = require("./routes/activityRoutes/journalingRoutes"),
     authRoutes          = require("./routes/auth")
     
-console.log(process.env.DATABASEURL);
 
 mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true })
 // mongoose.connect("mongodb://av:password1@ds127851.mlab.com:27851/heroic");
