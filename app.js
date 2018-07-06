@@ -1,7 +1,7 @@
-var express                 = require("express"),
+var express                 = require("express"), //Setting up the basic express app
     app                     = express(),
     bodyParser              = require("body-parser"),
-    mongoose                = require("mongoose"),
+    mongoose                = require("mongoose"),  //Added mongoose in right here
     passport                = require("passport"),
     LocalStrategy           = require("passport-local"),
     passportLocalMongoose   = require("passport-local-mongoose"),
@@ -17,12 +17,6 @@ mongoose.connect("mongodb://localhost:27017/heroicDB", { useNewUrlParser: true }
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs")
 
-//Connecting routes from other files
-app.use(activityRoutes);
-app.use(journalingRoutes);
-app.use(authRoutes);
-
-
 
 
 //PASSPORT CONFIGURATION
@@ -34,14 +28,22 @@ app.use(require("express-session")({
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate())); //method that comes with passport local mongoose we can use to authenticate users
+passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-app.get("/", function(req, res){
-    res.render("home")
-});
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    next();
+})
+//Connecting routes from other files
+app.use(activityRoutes);
+app.use(journalingRoutes);
+app.use(authRoutes);
+
+
+
 
 app.get("/scales", function(req, res){
     res.render("scales")
