@@ -48,13 +48,13 @@
 				<span class="containerDelete">X</span>
 				<h1>Healthy Lifestyle & Habits</h1>
 
-				<input type="text" name="" placeholder="Enter New Item">
+				<input type="text" name="" placeholder="Enter New Item" class="healthyInput">
 				
-				<div class="element"><input type="checkbox" name="Eat Healthy" id="eatHealthy"> <label for="eatHealthy">Eat Healthy</label>  <span class="elementDelete">X</span></div>
+				<div class="healthyElement" id ="Eat Healthy"><input type="checkbox" name="Eat Healthy" id="eatHealthy"> <label for="eatHealthy">Eat Healthy</label>  <span class="elementDelete">X</span></div>
 
-				<div class="element"><input type="checkbox" name="Exercise Well" id="exerciseWell"> <label for="exerciseWell">Exercise Well</label> <span class="elementDelete">X</span></div>
+				<div class="healthyElement" id ="Exercise Well"><input type="checkbox" name="Exercise Well" id="exerciseWell"> <label for="exerciseWell">Exercise Well</label> <span class="elementDelete">X</span></div>
 
-				<div class="element"><input type="checkbox" name="Sleep Correctly" id="sleepCorrectly"> <label for="sleepCorrectly">Sleep Correctly</label> <span class="elementDelete">X</span></div>
+				<div class="healthyElement" id="Sleep Correctly"><input type="checkbox" name="Sleep Correctly" id="sleepCorrectly"> <label for="sleepCorrectly">Sleep Correctly</label> <span class="elementDelete">X</span></div>
 			</div>
 			
 		</div>
@@ -98,11 +98,10 @@
 
 	<p></p>
 	
-	<script>
+<script>
 	var testArray = ["healthyHabits", "threeGratitudes", "threeKindness", "threeLessons", "toDoList"]
-	
-	
-		
+	var healthyArray = ["Eat Healthy", "Exercise Well", "Sleep Correctly"]
+	var toDoArray = []
 		
 	$('#store').on('click', function(){
 		$("#journalingSelector > option").each(function() {
@@ -110,328 +109,325 @@
 			if (index >= 1) {
 				delete testArray[index]
 			}
-			console.log(testArray)
 		});
 		sessionStorage.setItem('theArray', JSON.stringify(testArray));
+		sessionStorage.setItem('healthArray', JSON.stringify(healthyArray));
+		sessionStorage.setItem('toDoArray', JSON.stringify(toDoArray))
 	});
 	
+	removeItem();
+	healthyPressed();
+	toDoListPressed();
 	
-	/* global $ */
-	   // alert("conected");
-removeItem();
-pressed();
-toDoListPressed();
-
-
-function removeItem(){
-	$("div").on("click", "span", function(event){
-	$(this).parent().fadeOut(500, function(){
-		$(this).remove();
-		// var addJournal = document.getElementById("journalingSelector");
-		if (this.id === "healthyContainer"){
-			$("#journalingSelector").append('<option value="healthyHabits" title="Healthy Habits">Healthy Habits</option>')
-		}
-		else if(this.id === "threeGratitudesContainer"){
-			$("#journalingSelector").append('<option value="threeGratitudes" title="3 Gratitudes">3 Gratitudes</option>')
-		}
-		else if(this.id === "threeKindnessContainer"){
-			$("#journalingSelector").append('<option value="threeKindness" title="3 Acts of Kindness">3 Acts of Kindness</option>')
-		}
-		else if(this.id === "threeLessonsContainer"){
-			$("#journalingSelector").append('<option value="threeLessons" title="3 Lessons">3 Lessons</option>')
-		}
-		else if(this.id === "toDoListContainer"){
-			$("#journalingSelector").append('<option value="toDoList" title="Todo List">Todo List</option>')
-		}
-	}); //.parent gives us the parent of the span
-	event.stopPropagation();
-})
-}
-
-function pressed(){
-
-	$("#healthyContainer").on("keypress", "input", function(event){
-		if(event.which === 13){
-		var newItem = $(this).val();
-		$(this).val("");
-		var input = document.createElement("div");
-		input.innerHTML = '<input type="checkbox" name="Eat Healthy"' + 
-		' id="eatHealthy"> <label for="eatHealthy">' + newItem +'</label> ' + 
-		'<span>X</span>'
-		$("#healthyContainer").append(input)
-	}
+	
+	function removeItem(){
+		$("div").on("click", "span", function(event){
+		$(this).parent().fadeOut(500, function(){
+			
+			// var addJournal = document.getElementById("journalingSelector");
+			if (this.id === "healthyContainer"){
+				$("#journalingSelector").append('<option value="healthyHabits" title="Healthy Habits">Healthy Habits</option>')
+			}
+			else if(this.id === "threeGratitudesContainer"){
+				$("#journalingSelector").append('<option value="threeGratitudes" title="3 Gratitudes">3 Gratitudes</option>')
+			}
+			else if(this.id === "threeKindnessContainer"){
+				$("#journalingSelector").append('<option value="threeKindness" title="3 Acts of Kindness">3 Acts of Kindness</option>')
+			}
+			else if(this.id === "threeLessonsContainer"){
+				$("#journalingSelector").append('<option value="threeLessons" title="3 Lessons">3 Lessons</option>')
+			}
+			else if(this.id === "toDoListContainer"){
+				$("#journalingSelector").append('<option value="toDoList" title="Todo List">Todo List</option>')
+			}
+			else if(this.className === "healthyElement"){
+				var index = healthyArray.indexOf(this.id);
+				if (index !== -1){
+					healthyArray.splice(index, 1);
+				} 
+			}else if(this.className === "toDoElement"){
+				var index = toDoArray.indexOf(this.id);
+				if (index !== -1){
+					toDoArray.splice(index, 1);
+				}
+			}
+			$(this).remove();
+		}); //.parent gives us the parent of the span
+		event.stopPropagation();
 	})
-}
-
-function toDoListPressed(){
-
-	$("#container").on("keypress", "input", function(event){
-		if(event.which === 13){
-			var newItem = $(this).val();
-			$(this).val("");
-			var input = document.createElement("div");
-			input.className = "element"
-			input.innerHTML = '<span class="elementDelete">X</span> <input type="radio" name="fifthTodo"> <input type="radio" name="fifthTodo"> <label>' + newItem +'</label>'
-			$("#toDoListContainer").append(input)
 	}
-	})
-}
-
-
-function getValue()
-{
-	var addJournal = document.getElementById("journalingSelector");
-	var selectedValue = addJournal.value;
-	var container = document.getElementById("container");
-	var healthyContainer = document.getElementById("originalHealthyContainer")
-
-	if (selectedValue === "healthyHabits"){
-		container.append(createHealthForm(selectedValue));
-		for (var i=0; i < addJournal.length; i++){
-  			if (addJournal.options[i].value == 'healthyHabits' ){
-  				addJournal.remove(i);
-  			}
-  		}
+	
+	function healthyPressed(){
+	
+		$("#container").on("keypress", "#healthyContainer", ".healthyInput", function(event){
+			if(event.which === 13){
+				var newItem = $(".healthyInput").val();
+				$(".healthyInput").val("");
+				healthyArray.push(newItem)
+				console.log(healthyArray)
+				var input = document.createElement("div");
+				input.className = "healthyElement"
+				input.id = newItem
+				input.innerHTML = '<input type="checkbox" name="Eat Healthy"' + 
+				' id="eatHealthy"> <label for="eatHealthy">' + newItem +'</label> ' + 
+				'<span>X</span>'
+				$("#healthyContainer").append(input)
+		}
+		})
 	}
-
-	else if (selectedValue === "threeGratitudes"){
-		container.append(createThreeGratitudes(selectedValue));
-		for (var i=0; i < addJournal.length; i++){
-  			if (addJournal.options[i].value == 'threeGratitudes' ){
-  				addJournal.remove(i);
-  			}
-  		}
+	
+	function toDoListPressed(){
+	
+		$("#container").on("keypress", "#toDoListContainer", "input", function(event){
+			if(event.which === 13){
+				var newItem = $(".toDoInput").val();
+				$(".toDoInput").val("");
+				toDoArray.push(newItem);
+				console.log(toDoArray);
+				var input = document.createElement("div");
+				input.className = "toDoElement"
+				input.id = newItem
+				input.innerHTML = '<span class="elementDelete">X</span>' +
+				'<input type="radio" name="fifthTodo">' +
+				'<input type="radio" name="fifthTodo"> ' +
+				'<label>' + newItem +'</label>'
+				$("#toDoListContainer").append(input)
+		}
+		})
 	}
-
-	else if (selectedValue === "threeKindness"){
-		container.append(createThreeKindness(selectedValue));
-		for (var i=0; i < addJournal.length; i++){
-  			if (addJournal.options[i].value == 'threeKindness' ){
-  				addJournal.remove(i);
-  			}
-  		}
+	
+	
+	function getValue()
+	{
+		var addJournal = document.getElementById("journalingSelector");
+		var selectedValue = addJournal.value;
+		var container = document.getElementById("container");
+		var healthyContainer = document.getElementById("originalHealthyContainer")
+	
+		if (selectedValue === "healthyHabits"){
+			container.append(createHealthForm());
+			for (var i=0; i < addJournal.length; i++){
+	  			if (addJournal.options[i].value == 'healthyHabits' ){
+	  				addJournal.remove(i);
+	  			}
+	  		}
+		}
+	
+		else if (selectedValue === "threeGratitudes"){
+			container.append(createThreeGratitudes());
+			for (var i=0; i < addJournal.length; i++){
+	  			if (addJournal.options[i].value == 'threeGratitudes' ){
+	  				addJournal.remove(i);
+	  			}
+	  		}
+		}
+	
+		else if (selectedValue === "threeKindness"){
+			container.append(createThreeKindness());
+			for (var i=0; i < addJournal.length; i++){
+	  			if (addJournal.options[i].value == 'threeKindness' ){
+	  				addJournal.remove(i);
+	  			}
+	  		}
+		}
+		else if (selectedValue === "threeLessons"){
+			container.append(createThreeLessons());
+			for (var i=0; i < addJournal.length; i++){
+	  			if (addJournal.options[i].value == 'threeLessons' ){
+	  				addJournal.remove(i);
+	  			}
+	  		}
+		}
+		else if (selectedValue === "toDoList"){
+			container.append(createtoDoList());
+			for (var i=0; i < addJournal.length; i++){
+	  			if (addJournal.options[i].value == 'toDoList' ){
+	  				addJournal.remove(i);
+	  			}
+	  		}
+		}
+	
+		removeItem()
 	}
-	else if (selectedValue === "threeLessons"){
-		container.append(createThreeLessons(selectedValue));
-		for (var i=0; i < addJournal.length; i++){
-  			if (addJournal.options[i].value == 'threeLessons' ){
-  				addJournal.remove(i);
-  			}
-  		}
+	
+	
+	
+	
+	
+	function createHealthForm(){
+	
+		var d = document.createElement("div")
+		d.id = "healthyContainer"
+		d.className = "journalingContainer"
+	
+	
+		var s = document.createElement("span");
+		s.innerHTML = "X"
+		s.className = "containerDelete"
+		d.append(s);
+	
+		var title = document.createElement("h1");
+		title.innerHTML = "Healthy Lifestyle & Habits";
+		d.append(title);
+	
+			var input = document.createElement("input");
+			input.type = "text"
+			input.className = "healthyInput"
+			input.placeholder = "Insert New Item"
+	
+			d.append(input)
+	
+			var input1 = document.createElement("div");
+			input1.id = "Eat Healthy"
+			input.className = "healthyElement"
+			input1.innerHTML = '<input type="checkbox" name="Eat Healthy"' + 
+			' id="eatHealthy"> <label for="eatHealthy">Eat Healthy</label> ' + 
+			'<span>X</span>'
+			d.append(input1)
+	
+			var input2 = document.createElement("div");
+			input2.id = "Exercise Well"
+			input2.className = "healthyElement"
+			input2.innerHTML = '<input type="checkbox" name="Exercise Well"' + 
+			' id="exerciseWell"> <label for="exerciseWell">Exercise Well</label> ' + 
+			'<span>X</span>'
+			d.append(input2)
+	
+			var input3 = document.createElement("div");
+			input3.id = "Sleep Correctly"
+			input3.className = "healthyElement"
+			input3.innerHTML =  '<input type="checkbox" name="Sleep Correctly"' + 
+			' id="sleepCorrectly"> <label for="sleepCorrectly">Sleep Correctly</label> ' + 
+			'<span>X</span>'
+			d.append(input3)
+	
+		return d;
+		
+		presed()
 	}
-	else if (selectedValue === "toDoList"){
-		container.append(createtoDoList(selectedValue));
-		for (var i=0; i < addJournal.length; i++){
-  			if (addJournal.options[i].value == 'toDoList' ){
-  				addJournal.remove(i);
-  			}
-  		}
+	
+	
+	function createThreeGratitudes(){
+		var d = document.createElement("div")
+		d.id = "threeGratitudesContainer"
+		d.className = "journalingContainer"
+	
+	
+		var s = document.createElement("span");
+		s.innerHTML = "X"
+		s.className = "containerDelete"
+		d.append(s);
+	
+		var title = document.createElement("h1");
+		title.innerHTML = "3 Gratitudes"
+		d.append(title);
+	
+		var input1 = document.createElement("div");
+		input1.innerHTML = '<label for="firstGratitude">1.</label>  <input type="text" name="" id="firstGratitude">'
+		d.append(input1)
+	
+		var input2 = document.createElement("div");
+		input2.innerHTML = '<label for="secondGratitude">2.</label> <input type="text" name="" id="secondGratitude">'
+		d.append(input2)
+	
+		var input3 = document.createElement("div");
+		input3.innerHTML = '<label for="thirdGratitude">3.</label> <input type="text" name="" id="thirdGratitude">'
+		d.append(input3)
+	
+		return d;
 	}
-
-	removeItem()
-}
-
-
-
-
-
-function createHealthForm(selectedValue){
-
-	var d = document.createElement("div")
-	d.id = "healthyContainer"
-	d.className = "journalingContainer"
-
-
-	var s = document.createElement("span");
-	s.innerHTML = "X"
-	s.className = "containerDelete"
-	d.append(s);
-
-	var title = document.createElement("h1");
-	title.innerHTML = "Healthy Lifestyle & Habits";
-	d.append(title);
-
+	
+	
+	function createThreeKindness(){
+		var d = document.createElement("div")
+		d.id = "threeKindnessContainer"
+		d.className = "journalingContainer"
+	
+	
+		var s = document.createElement("span");
+		s.innerHTML = "X"
+		s.className = "containerDelete"
+		d.append(s);
+	
+		var title = document.createElement("h1");
+		title.innerHTML = "3 Acts of Kindness"
+		d.append(title);
+	
+		var input1 = document.createElement("div");
+		input1.innerHTML = '<label for="firstKindness">1.</label> <input type="text" name="" id="firstKindness">'
+		d.append(input1)
+	
+		var input2 = document.createElement("div");
+		input2.innerHTML = '<label for="secondKindness">2.</label> <input type="text" name="" id="secondKindness">'
+		d.append(input2)
+	
+		var input3 = document.createElement("div");
+		input3.innerHTML = '<label for="thirdKindness">3.</label> <input type="text" name="" id="thirdKindness">'
+		d.append(input3)
+	
+		return d;
+	}
+	
+	function createThreeLessons(){
+		var d = document.createElement("div")
+		d.id = "threeLessonsContainer"
+		d.className = "journalingContainer"
+	
+	
+		var s = document.createElement("span");
+		s.innerHTML = "X"
+		s.className = "containerDelete"
+		d.append(s);
+	
+		var title = document.createElement("h1");
+		title.innerHTML = "3 Lessons I Learned"
+		d.append(title);
+	
+		var input1 = document.createElement("div");
+		input1.innerHTML = '<label for="firstLesson">1.</label> <input type="text" name="" id="firstLesson">'
+		d.append(input1)
+	
+		var input2 = document.createElement("div");
+		input2.innerHTML = '<label for="secondLesson">2.</label> <input type="text" name="" id="secondLesson">'
+		d.append(input2)
+	
+		var input3 = document.createElement("div");
+		input3.innerHTML = '<label for="thirdLesson">3.</label> <input type="text" name="" id="thirdLesson">'
+		d.append(input3)
+	
+		return d;
+	}
+	
+	function createtoDoList(){
+		var d = document.createElement("div")
+		d.id = "toDoListContainer"
+		d.className = "journalingContainer"
+	
+	
+		var s = document.createElement("span");
+		s.innerHTML = "X"
+		s.className = "containerDelete"
+		d.append(s);
+	
+		var title = document.createElement("h1");
+		title.innerHTML = "To-Do List for Tomorrow";
+		d.append(title);
+	
 		var input = document.createElement("input");
 		input.type = "text"
+		input.className = "toDoInput"
 		input.placeholder = "Insert New Item"
-
+	
 		d.append(input)
-
-
-		var input1 = document.createElement("div");
-		input1.innerHTML = '<input type="checkbox" name="Eat Healthy"' + 
-		' id="eatHealthy"> <label for="eatHealthy">Eat Healthy</label> ' + 
-		'<span>X</span>'
-		d.append(input1)
-
-		var input2 = document.createElement("div");
-		input2.innerHTML = '<input type="checkbox" name="Exercise Well"' + 
-		' id="exerciseWell"> <label for="exerciseWell">Exercise Well</label> ' + 
-		'<span>X</span>'
-		d.append(input2)
-
-		var input3 = document.createElement("div");
-		input3.innerHTML =  '<input type="checkbox" name="Sleep Correctly"' + 
-		' id="sleepCorrectly"> <label for="sleepCorrectly">Sleep Correctly</label> ' + 
-		'<span>X</span>'
-		d.append(input3)
-
-	return d;
-}
-
-
-function createThreeGratitudes(selectedValue){
-	var d = document.createElement("div")
-	d.id = "threeGratitudesContainer"
-	d.className = "journalingContainer"
-
-
-	var s = document.createElement("span");
-	s.innerHTML = "X"
-	s.className = "containerDelete"
-	d.append(s);
-
-	var title = document.createElement("h1");
-	title.innerHTML = "3 Gratitudes"
-	d.append(title);
-
-	var input1 = document.createElement("div");
-	input1.innerHTML = '<label for="firstGratitude">1.</label>  <input type="text" name="" id="firstGratitude">'
-	d.append(input1)
-
-	var input2 = document.createElement("div");
-	input2.innerHTML = '<label for="secondGratitude">2.</label> <input type="text" name="" id="secondGratitude">'
-	d.append(input2)
-
-	var input3 = document.createElement("div");
-	input3.innerHTML = '<label for="thirdGratitude">3.</label> <input type="text" name="" id="thirdGratitude">'
-	d.append(input3)
-
-	return d;
-}
-
-
-function createThreeKindness(selectedValue){
-	var d = document.createElement("div")
-	d.id = "threeKindnessContainer"
-	d.className = "journalingContainer"
-
-
-	var s = document.createElement("span");
-	s.innerHTML = "X"
-	s.className = "containerDelete"
-	d.append(s);
-
-	var title = document.createElement("h1");
-	title.innerHTML = "3 Acts of Kindness"
-	d.append(title);
-
-	var input1 = document.createElement("div");
-	input1.innerHTML = '<label for="firstKindness">1.</label> <input type="text" name="" id="firstKindness">'
-	d.append(input1)
-
-	var input2 = document.createElement("div");
-	input2.innerHTML = '<label for="secondKindness">2.</label> <input type="text" name="" id="secondKindness">'
-	d.append(input2)
-
-	var input3 = document.createElement("div");
-	input3.innerHTML = '<label for="thirdKindness">3.</label> <input type="text" name="" id="thirdKindness">'
-	d.append(input3)
-
-	return d;
-}
-
-function createThreeLessons(selectedValue){
-	var d = document.createElement("div")
-	d.id = "threeLessonsContainer"
-	d.className = "journalingContainer"
-
-
-	var s = document.createElement("span");
-	s.innerHTML = "X"
-	s.className = "containerDelete"
-	d.append(s);
-
-	var title = document.createElement("h1");
-	title.innerHTML = "3 Lessons I Learned"
-	d.append(title);
-
-	var input1 = document.createElement("div");
-	input1.innerHTML = '<label for="firstLesson">1.</label> <input type="text" name="" id="firstLesson">'
-	d.append(input1)
-
-	var input2 = document.createElement("div");
-	input2.innerHTML = '<label for="secondLesson">2.</label> <input type="text" name="" id="secondLesson">'
-	d.append(input2)
-
-	var input3 = document.createElement("div");
-	input3.innerHTML = '<label for="thirdLesson">3.</label> <input type="text" name="" id="thirdLesson">'
-	d.append(input3)
-
-	return d;
-}
-
-function createtoDoList(selectedValue){
-	var d = document.createElement("div")
-	d.id = "toDoListContainer"
-	d.className = "journalingContainer"
-
-
-	var s = document.createElement("span");
-	s.innerHTML = "X"
-	s.className = "containerDelete"
-	d.append(s);
-
-	var title = document.createElement("h1");
-	title.innerHTML = "To-Do List for Tomorrow";
-	d.append(title);
-
-	var input = document.createElement("input");
-	input.type = "text"
-	input.placeholder = "Insert New Item"
-
-	d.append(input)
-
-	var headers = document.createElement("div");
-	headers.innerHTML = "<h4>Imp Urg</h4>"
-	d.append(headers)
-
-	var input1 = document.createElement("div");
-	input1.innerHTML = '<span class="elementDelete">X</span> <input type="radio" name="firstTodo"> <input type="radio" name="firstTodo"> <input type="text" name="" id="firstTodo">'
-	input1.className = "element"
-	d.append(input1)
-
-	var input2 = document.createElement("div");
-	input2.innerHTML = '<span class="elementDelete">X</span> <input type="radio" name="secondTodo"> <input type="radio" name="secondTodo"> <input type="text" name="" id="secondTodo">'
-	input2.className = "element"
-	d.append(input2)
-
-	var input3 = document.createElement("div");
-	input3.innerHTML = '<span class="elementDelete">X</span> <input type="radio" name="thirdTodo"> <input type="radio" name="thirdTodo"> <input type="text" name="" id="thirdTodo">'
-	input3.className = "element"
-	d.append(input3)
-
-	var input4 = document.createElement("div");
-	input4.innerHTML = '<span class="elementDelete">X</span> <input type="radio" name="fourthTodo"> <input type="radio" name="fourthTodo"> <input type="text" name="" id="fourthTodo">'
-	input4.className = "element"
-	d.append(input4)
-
-	var input5 = document.createElement("div");
-	input5.innerHTML = '<span class="elementDelete">X</span> <input type="radio" name="fifthTodo"> <input type="radio" name="fifthTodo"> <input type="text" name="" id="fifthTodo">'
-	input5.className = "element"
-	d.append(input5)
-
-	return d;
-
-	toDoListPressed();
-}
-
-// var bigTemplate = document.getElementById("journalingTemplate")
-// $("#journalingContainer").append(bigTemplate)
-// console.log(bigTemplate)
-// console.log(document.getElementById('journalingContainer'))
-// $("#journalingTemplate").load("/journalingPage.html #section");
-
-	</script>
+	
+		var headers = document.createElement("div");
+		headers.innerHTML = "<h4>Imp Urg</h4>"
+		d.append(headers)
+	
+		return d;
+	
+		toDoListPressed();
+	}
+</script>
 
 <% include ../../partials/footer/ %>

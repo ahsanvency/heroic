@@ -9,6 +9,7 @@ var journalingSchema = new mongoose.Schema({
         },
         username: String
     },
-    journalingArray: []
+    journalingArray: [],
+    healthyArray: []
     
 })
