@@ -1,6 +1,11 @@
 <% include ../partials/header/ %>
 
+<% if(currentUser){ %>
+<h1>WORKED</h1>
+<%}%>
+
 <button><a href="/activities/journalingHome">Activity #1: Journaling</a></button>
-<!--<button><a href="healthyLifestyleHomepage.html">Activity #2: Healthy Lifestyle Project</a></button>-->
+<button><a href="/activities/healthyHome">Activity #2: Healthy Lifestyle Project</a></button>
+
 
 <% include ../partials/footer/ %>

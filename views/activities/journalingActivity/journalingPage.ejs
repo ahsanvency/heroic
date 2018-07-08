@@ -1,5 +1,9 @@
 <% include ../../partials/header/ %>
 
+
+<% var test = 101; %>
+
+
 <form id="journalingTemplate">
 
 		<form id="basicTemplate">
@@ -26,16 +30,15 @@
 		<div id="container">
 
 			<div id="healthyContainer">
-				<span>X</span>
 				<h1>Healthy Lifestyle & Habits</h1>
 
 				<!-- <input type="text" name="" placeholder="Enter New Item"> -->
 				
-				<div><input type="checkbox" name="Eat Healthy" id="eatHealthy"> <label for="eatHealthy">Eat Healthy</label>  <span>X</span></div>
+				<div><input type="checkbox" name="Eat Healthy" id="eatHealthy"> <label for="eatHealthy">Eat Healthy</label></div>
 
-				<div><input type="checkbox" name="Exercise Well" id="exerciseWell"> <label for="exerciseWell">Exercise Well</label> <span>X</span></div>
+				<div><input type="checkbox" name="Exercise Well" id="exerciseWell"> <label for="exerciseWell">Exercise Well</label></div>
 
-				<div><input type="checkbox" name="Sleep Correctly" id="sleepCorrectly"> <label for="sleepCorrectly">Sleep Correctly</label> <span>X</span></div>
+				<div><input type="checkbox" name="Sleep Correctly" id="sleepCorrectly"> <label for="sleepCorrectly">Sleep Correctly</label></div>
 			</div>
 
 			<div id="threeGratitudesContainer">
@@ -79,15 +82,15 @@
 
 		<p></p>
 
-		<div class="btn-group happinessScale">
-	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/1.png"></button>
-	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/2.png"></button>
-	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/3.png"></button>
-	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/4.png"></button>
-	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/5.png"></button>
-	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/6.png"></button>
-	  		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/7.png"></button>
-	  	</div>
+		<!--<div class="btn-group happinessScale">-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/1.png"></button>-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/2.png"></button>-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/3.png"></button>-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/4.png"></button>-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/5.png"></button>-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/6.png"></button>-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/7.png"></button>-->
+	 <!-- 	</div>-->
 
   	</form>
 
@@ -107,3 +110,10 @@
 
 	
 <% include ../../partials/footer/ %>
+
+
+
+<script>
+	var getTest = <%= test  %>;  //var test is now assigned to getTest which will only work on browsers
+    console.log(getTest);  // successfully prints 101 on browser
+</script>

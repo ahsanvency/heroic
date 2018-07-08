@@ -9,11 +9,12 @@ var express                 = require("express"), //Setting up the basic express
     
 var activityRoutes      = require("./routes/activityRoutes/activitiesHome"),
     journalingRoutes    = require("./routes/activityRoutes/journalingRoutes"),
+    healthyRoutes       = require("./routes/activityRoutes/healthyRoutes"),
     authRoutes          = require("./routes/auth")
     
 // console.log(process.env.DATABASEURL)
-// mongoose.connect("mongodb://localhost:27017/heroicDB", { useNewUrlParser: true })
-mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true })
+mongoose.connect("mongodb://localhost:27017/heroicDB", { useNewUrlParser: true })
+// mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true })
 // mongoose.connect("mongodb://av:password1@ds127851.mlab.com:27851/heroic");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs")
@@ -41,6 +42,7 @@ app.use(function(req, res, next){
 //Connecting routes from other files
 app.use(activityRoutes);
 app.use(journalingRoutes);
+app.use(healthyRoutes);
 app.use(authRoutes);
 
 

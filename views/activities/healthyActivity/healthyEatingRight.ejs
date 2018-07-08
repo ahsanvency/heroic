@@ -1,0 +1,163 @@
+<% include ../../partials/header/ %>
+
+<div class="container">
+    
+    <h1>Eating Right</h1>
+
+    <p>As you can see below, there are a number of things you could do to eat right, such as, “keep unhealthy items in hard to reach places and healthy items in easy to reach places,” “replacing larger plates or bowls with smaller ones,” etc. </p>
+
+    <p>You will need to pick three things from this list as part of your “eating right” plan. Or, if you don’t want to pick items from this list, you can do something else that’s not on this list, but is consistent with the goal of “eating right,” by choosing the “Other” options at the end. </p>
+
+    <p>One you choose a particular item on the “eating right” list—and these may be things that you are already doing, by the way; so, you don’t have to come up with something new—you’ll need to fill in some details in the space next to it. For example, if you chose to “replace large plates with smaller ones,” you could type in: “I will replace the plates I currently use, which are 12 inches in diameter with ones that are 9 inches in diameter.” Or, if you want to choose something that’s not on your list, you could type in: “I will drink less than 2 alcoholic drinks a day.” </p>
+
+    <p>Needless to say, it is very important to come up with a plan that you can stick to. For example, if you consume more 15 spoons of sugar a day, don’t plan on going cold turkey and giving up sugar altogether. Plan to have only 10 spoons of sugar a day. As the book <a href="https://www.amazon.com/Mini-Habits-Smaller-Bigger-Results-ebook/dp/B00HGKNBDK">“Mini Habits”</a> suggests, it’s better to aim a little low and accomplish your goals than to aim too high and feel that you aren’t able to live up to your promises. </p>
+
+    <div id="container">
+        
+      <div id="moveItemsDiv"><input type="checkbox" value="moveItems" name="moveItems" id="moveItems" class="checkbox"><label for="moveItems">  Put unhealthy items (e.g., potato chips) in hard-to-reach places and healthy items (e.g., carrot sticks) in easier to reach places</label></div>
+
+      <div id="replacePlatesDiv"><input type="checkbox" value="replacePlates" name="replacePlates" id="replacePlates" class="checkbox"><label for="replacePlates">  Replace larger plates or bowls with smaller ones (if you are overweight)</label></div>
+
+      <div id="changePlateColorDiv"><input type="checkbox" value="changePlateColor" name="changePlateColor" id="changePlateColor" class="checkbox"><label for="changePlateColor">  Replace white plates/bowls with plates of a different color</label></div>
+
+      <div id="holdSnacksDiv"><input type="checkbox" value="holdSnacks" name="holdSnacks" id="holdSnacks" class="checkbox"><label for="holdSnacks">  If you often eat out, carry a bag of healthy snacks with you (fruits or nuts) to tide you over in case you get hungry</label></div>
+
+      <div id="startHealthyDiv"><input type="checkbox" value="startHealthy" name="startHealthy" id="startHealthy" class="checkbox"><label for="startHealthy">  Start your meals with healthy items (e.g., fresh/raw veggies instead of rice or chips/fries)</label></div>
+
+      <div id="healthyBreakfastDiv"><input type="checkbox" value="healthyBreakfast" name="healthyBreakfast" id="healthyBreakfast" class="checkbox"><label for="healthyBreakfast">  Eat a healthy breakfast (e.g., eggs, oatmeal or steamed items—like idlis—rather than fried items, like hash browns, or simple carbs, like sugary cereal or white bread and jam)</label></div>
+
+     <div id="reduceSugarDiv"><input type="checkbox" value="reduceSugar" name="reduceSugar" id="reduceSugar" class="checkbox"><label for="reduceSugar">  Reduce sugar intake (from, say, 10 spoons a day—across all your drinks--to 6)</label></div>
+
+     <div id="reduceSnacksDiv"><input type="checkbox" value="reduceSnacks" name="reduceSnacks" id="reduceSnacks" class="checkbox"><label for="reduceSnacks">  Reduce consumption of items (e.g., “trailmix” bar) with more than 10 grams of sugar (from, say 5 items a day to 3 or less)</label></div>
+
+     <div id="longerMealsDiv"><input type="checkbox" value="longerMeals" name="longerMeals" id="longerMeals" class="checkbox"><label for="longerMeals">  Take longer (ideally 20 minutes) to finish a meal that you typically rush through</label></div>
+
+     <div id="familyMealDiv"><input type="checkbox" value="familyMeal" name="familyMeal" id="familyMeal" class="checkbox"><label for="familyMeal">  Eat at least one meal (ideally dinner) with friends/family</label></div>
+     
+     <div id="noSnackDiv"><input type="checkbox" value="noSnack" name="noSnack" id="noSnack" class="checkbox"><label for="noSnack">  Not snack after dinner</label></div>
+
+     <div id="optionsContainer">
+
+     </div>
+
+     <input type="text" name="" placeholder="Insert New Item">
+    </div>
+
+
+    <p>Once you have come up with a plan for “eating right,” click the “continue” button, which will take you to the next page.</p>
+    
+    <a class="btn btn-primary active" href="/activities/healthyHome"><- Healthy Lifestyle Home</a>
+    <!--<a class="btn btn-primary active" id="merge_button" onclick="checkThreeChoices()">Check clicks</a>-->
+    <a class="btn btn-primary active" id="merge_button" href="/activities/healthyMovingMore">Moving More -></a>
+    <!--<a class="btn btn-primary active" id="merge_button" href="#">Check clicks</a>-->
+    
+    </div>
+    
+<% include ../../partials/footer/ %>
+
+<script>
+
+    var eatingRightVals = [];
+    var eatingChoices = []
+        
+    $("#merge_button").click(function(event){
+        $(":checkbox:checked").each(function() {
+            eatingChoices.push($(this).next('label').next('input').val())
+            eatingRightVals.push($(this).next('label').text());
+        })
+        sessionStorage.setItem('eatingArray', JSON.stringify(eatingRightVals));
+        sessionStorage.setItem('eatingChoices', JSON.stringify(eatingChoices));
+    });
+    
+    
+    function inputDynamic(){
+      $(".checkbox").each(function(){
+          $("#" + $(this).val() + "Div").append('<input id="' + $(this).val() + 'Input" name="' + $(this).val() + 'Input" size="50" type="text" input>')
+          if($(this).is(":checked") == false){
+              $('input[name="' + $(this).val() + 'Input"]').hide();
+          }
+        });
+        
+        //show it when the checkbox is clicked
+        $('.checkbox').on('click', function () {
+            if ($(this).prop('checked')) {
+                $('input[name="' + $(this).val() + 'Input"]').fadeIn();
+            } else {
+                $('input[name="' + $(this).val() + 'Input"]').hide();
+            }
+    }); 
+}
+
+    
+    inputDynamic();
+    inputPressed();
+
+
+    
+    function checkThreeChoices(){
+    	if ($(":checkbox:checked").length < 3){
+    		alert("Please Select Three Choices")
+    	}else{
+    		window.location.href = "/activities/healthyMovingMore"
+    	}
+    }
+    
+    function inputPressed(){
+    
+    	$("#container").on("keypress", "input", function(event){
+    		if(event.which === 13){
+    			var newItem = $(this).val();
+    			var id = newItem.slice(0, 5);
+    			$(this).val("");
+    			
+    			var input = document.createElement("div");
+    			input.innerHTML = '<div id=' + id + 'Div>' + 
+    			'<input type="checkbox" value=' + id + ' name="' + id + '" id=' + id + '" class="checkbox">' + 
+    			'<label for=' + id + '>' +
+    			newItem + '</label></div>'
+    			$("#optionsContainer").append(input)
+    	}
+    	})
+    }
+    
+    
+      // var eatingDict = {
+    //     "moveItems" : "Put unhealthy items (e.g., potato chips) in hard-to-reach places and healthy items (e.g., carrot sticks) in easier to reach places"
+    // }
+    
+    // $(function () {
+    //     for (var key in eatingDict) {
+    //         // check if the property/key is defined in the object itself, not in parent
+    //         if (eatingDict.hasOwnProperty(key)) {           
+    //             var div = document.createElement("div")
+    //             div.id = key + "Div"
+                
+    //             var input = document.createElement("input")
+    //             input.innerHTML = 
+    //             input.type = "checkbox"
+    //             input.value, input.name, input.id = key
+    //             input.className = "checkbox"
+    //             input.addEventListener("click", inputDynamic, false);
+                
+    //             var label = document.createElement("label")
+    //             label.for = key
+    //             label.innerHTML = eatingDict[key]
+                
+                
+    //             var inputField = document.createElement("input")
+    //             inputField.id, inputField.name = key + "Input"
+    //             inputField.type = "text"
+                
+    //             div.append(input)
+    //             div.append(label)
+    //             div.append(inputField)
+                
+    //             $('#container').append(div)
+    //         }
+            
+    //         <div id="moveItemsDiv"><input type="checkbox" value="moveItems" name="moveItems" id="moveItems" class="checkbox"><label for="moveItems">  Put unhealthy items (e.g., potato chips) in hard-to-reach places and healthy items (e.g., carrot sticks) in easier to reach places</label> 
+    //   <input id="moveItemsInput" name="moveItemsInput" size="50" type="text" input></div>
+            
+    //     }
+    // })
+</script>

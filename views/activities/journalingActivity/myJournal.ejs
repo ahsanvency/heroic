@@ -1,19 +1,70 @@
 <% include ../../partials/header/ %>
 
+<form id="journalingTemplate">
 
-<div id="chosenJournalingContainer"></div>
+		<form id="basicTemplate">
 
+			<h4>Three significant things that happened today and why they happened</h4>
+
+			<p></p>
+			<label for="first">Number 1</label>
+			<div></div>
+			<textarea class= "journalingInput" id="first" name="Text1"></textarea>
+			<p></p>
+
+			<label for="second">Number 2</label>
+			<div></div>
+			<textarea class= "journalingInput" id="second" name="Text2"></textarea>
+			<p></p>
+
+			<label for="third">Number 3</label>
+			<div></div>
+			<textarea class= "journalingInput" id="third" name="Text3"></textarea>
+			<p></p>
+		</form>
+		
+		<div id="chosenJournalingContainer">
+			
+			
+			
+		</div>
+		<p></p>
+
+		<!--<div class="btn-group happinessScale">-->
+
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/1.png"></button>-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/2.png"></button>-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/3.png"></button>-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/4.png"></button>-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/5.png"></button>-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/6.png"></button>-->
+	 <!-- 		<button type="button" class="btn btn-light scaleButton"><img class="cover" src="happinessScalePictures/7.png"></button>-->
+	 <!-- 	</div>-->
+
+  	</form>
+
+
+<!--<% if(currentUser){ %>-->
+<!--<form>-->
+<!--	<% var journalingArray = ["WORK", "WORKED"]%>-->
+<!--	<button><a href="/activities/customJournal">Save my journal template</a></button>-->
+<!--</form>-->
+<!--<%}%>-->
+
+
+
+    
 <script>
 
-var jouranlingArray = []
+var journalingArray = []
 var healthyArray = []
 var toDoArray = []
 
 
 $(document).ready(function(){
-    jouranlingArray = JSON.parse(sessionStorage.getItem("theArray"));
-    if (jouranlingArray != undefined && jouranlingArray.length > 0){
-        jouranlingArray.forEach(function(element){
+    journalingArray = JSON.parse(sessionStorage.getItem("theArray"));
+    if (journalingArray != undefined && journalingArray.length > 0){
+        journalingArray.forEach(function(element){
             if(element != null){
                 if(element === "healthyHabits"){
                     healthyArray = JSON.parse(sessionStorage.getItem("healthArray"));

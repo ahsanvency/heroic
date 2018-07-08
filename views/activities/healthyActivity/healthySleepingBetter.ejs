@@ -1,0 +1,131 @@
+<% include ../../partials/header/ %>
+
+<div class="container">
+    <h1>Sleeping Better</h1>
+
+    <p>It turns out that almost everyone needs at least 7 hours of sleep a night—regardless of how much you think you need, as Matthew Walker suggests in his excellent book, <a href="https://www.amazon.com/Why-We-Sleep-Unlocking-Dreams/dp/1501144316">Why We Sleep.</a> So, try your best to get at least 7 hours of sleep for the week during which you are doing this exercise; later, you can decide if that was too much.  </p>
+
+    <p>I once again want to stress, as I did with “eating right” and “sleeping more” earlier, that come up with a plan that you can stick to. For example, if you really can’t afford to get 7 hours of sleep a night, don’t make that part of your plan—despite what I just said. I’ll be a bit disappointed, but hey, it’s better that you disappoint me than disappoint yourself!   </p>
+
+    <p>As with the previous two components of the “healthy lifestyle” plan, there are a list of items below. These items will help you sleep better.   </p>
+
+    <div id="container">
+      <div id="minimizeLightDiv"><input type="checkbox" value="minimizeLight" name="minimizeLight" id="minimizeLight" class="checkbox"><label for="minimizeLight">Minimize sources of artificial light (e.g., TV, iPad) in bedroom.</label></div>
+
+      <div id="whiteNoiseDiv"><input type="checkbox" value="whiteNoise" name="whiteNoise" id="rwhiteNoise" class="checkbox"><label for="rwhiteNoise">  Get white noise machine for the bedroom.</label></div>
+
+      <div id="regularScheduleDiv"><input type="checkbox" value="regularSchedule" name="regularSchedule" id="regularSchedule" class="checkbox"><label for="regularSchedule">  Follow regular sleep schedule (e.g., go to bed at 10 p.m. every night and wake up no earlier than 6 a.m.)</label></div>
+
+      <div id="preventStressDiv"><input type="checkbox" value="preventStress" name="preventStress" id="preventStress" class="checkbox"><label for="preventStress"> Prevent stress from spoiling sleep (e.g., don’t argue with spouse on which TV channel to watch).</label></div>
+
+      <div id="warmShowerDiv"><input type="checkbox" value="warmShower" name="warmShower" id="warmShower" class="checkbox"><label for="warmShower"> Take a warm shower thirty minutes before sleep.</label></div>
+
+      <div id="earlyDinnerDiv"><input type="checkbox" value="earlyDinner" name="earlyDinner" id="earlyDinner" class="checkbox"><label for="earlyDinner"> Eat early dinner (no food an hour and a half before going to sleep).</label></div>
+
+     <div id="coolRoomDiv"><input type="checkbox" value="coolRoom" name="coolRoom" id="coolRoom" class="checkbox"><label for="coolRoom">  Make bedroom two or three degrees cooler than the rest of the house (if this is not energy inefficient); use thick blankets if needed.</label></div>
+
+     <div id="exerciseDiv"><input type="checkbox" value="exercise" name="exercise" id="exercise" class="checkbox"><label for="exercise"> Exercise sometime during the day (exercise improves quality of sleep).</label></div>
+
+     <div id="ruleWalkDiv"><input type="checkbox" value="ruleWalk" name="ruleWalk" id="ruleWalk" class="checkbox"><label for="ruleWalk"> Make it a rule to walk if you are going somewhere less than X kilometers/miles away (you get to choose “X”)</label></div>
+
+     <div id="optionsContainer">
+
+     </div>
+
+     <input type="text" name="" placeholder="Insert New Item">
+
+    </div>
+
+
+    <p>Once you have come up with a plan for “Sleeping Better,” click the “continue” button, which will take you to the next page.</p>
+    
+    <a class="btn btn-primary active" href="/activities/healthyMovingMore"><- Moving More</a>
+    <!--<a class="btn btn-primary active" id="merge_button" onclick="checkThreesleepingChoices()">Check clicks</a>-->
+    <a class="btn btn-primary active" id="merge_button" href="/activities/healthyTEST">Continue -></a>
+    <!--<a class="btn btn-primary active" id="merge_button" href="#">Check clicks</a>-->
+
+
+  </div>
+    
+<% include ../../partials/footer/ %>
+
+<script>
+    var sleepingbetterVals = [];
+    var sleepingChoices = []
+        
+    $("#merge_button").click(function(event){
+        $(":checkbox:checked").each(function() {
+            sleepingChoices.push($(this).next('label').next('input').val())
+            sleepingbetterVals.push($(this).next('label').text());
+        })
+        sessionStorage.setItem('sleepingArray', JSON.stringify(sleepingbetterVals));
+        sessionStorage.setItem('sleepingChoices', JSON.stringify(sleepingChoices));
+    });
+    
+    
+    function inputDynamic(){
+      $(".checkbox").each(function(){
+          $("#" + $(this).val() + "Div").append('<input id="' + $(this).val() + 'Input" name="' + $(this).val() + 'Input" size="50" type="text" input>')
+          if($(this).is(":checked") == false){
+              $('input[name="' + $(this).val() + 'Input"]').hide();
+          }
+        });
+        
+        //show it when the checkbox is clicked
+        $('.checkbox').on('click', function () {
+            if ($(this).prop('checked')) {
+                $('input[name="' + $(this).val() + 'Input"]').fadeIn();
+            } else {
+                $('input[name="' + $(this).val() + 'Input"]').hide();
+            }
+    }); 
+}
+
+function inputDynamic(){
+      $(".checkbox").each(function(){
+          $("#" + $(this).val() + "Div").append('<input id="' + $(this).val() + 'Input" name="' + $(this).val() + 'Input" size="50" type="text" input>')
+          if($(this).is(":checked") == false){
+              $('input[name="' + $(this).val() + 'Input"]').hide();
+          }
+        });
+        
+        //show it when the checkbox is clicked
+        $('.checkbox').on('click', function () {
+            if ($(this).prop('checked')) {
+                $('input[name="' + $(this).val() + 'Input"]').fadeIn();
+            } else {
+                $('input[name="' + $(this).val() + 'Input"]').hide();
+            }
+    }); 
+}
+
+    
+    inputDynamic();
+    inputPressed();
+
+    
+    function checkThreeChoices(){
+    	if ($(":checkbox:checked").length < 3){
+    		alert("Please Select Three Choices")
+    	}else{
+    		window.location.href = "/activities/healthyTEST"
+    	}
+    }
+    
+    function inputPressed(){
+    
+    	$("#container").on("keypress", "input", function(event){
+    		if(event.which === 13){
+    			var newItem = $(this).val();
+    			var id = newItem.slice(0, 5);
+    			$(this).val("");
+    			var input = document.createElement("div");
+    			input.innerHTML = '<div id=' + id + 'Div>' + 
+    			'<input type="checkbox" value=' + id + ' name="' + id + '" id=' + id + '" class="checkbox">' + 
+    			'<label for=' + id + '>' +
+    			newItem + '</label></div>'
+    			$("#optionsContainer").append(input)
+    	}
+    	})
+    }
+</script>

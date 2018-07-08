@@ -1,0 +1,72 @@
+<% include ../../partials/header/ %>
+
+<div class="container">
+    <div id=eatingContainer>
+        <h1>Eating Right</h1>
+    </div>
+    
+    <div id=movingContainer>
+        <h1>Moving More</h1>
+    </div>
+    
+    <div id=sleepingContainer>
+        <h1>Sleeping Better</h1>
+    </div>
+</div>
+
+
+
+<% include ../../partials/footer/ %>
+
+<script>
+    var eatingArray = JSON.parse(sessionStorage.getItem("eatingArray"));
+    var eatingChoices = JSON.parse(sessionStorage.getItem("eatingChoices"));
+    var eatingDict = []
+    
+    for(var i = 0 ; i < eatingArray.length; i++){
+        eatingDict[eatingArray[i]] = eatingChoices[i]
+    }
+    
+    for (var key in eatingDict) {
+        $('#eatingContainer').append("<li> Item Selected: " + key + "</li>")
+        if(eatingDict[key]){
+            $('#eatingContainer').append("<li>Your Action Step: " + eatingDict[key] + "</li>")
+        }else{
+            $('#eatingContainer').append("<li>You did not select an action step.</li>")
+        }
+    }
+    
+    var movingArray = JSON.parse(sessionStorage.getItem("movingArray"));
+    var movingChoices = JSON.parse(sessionStorage.getItem("movingChoices"));
+    var movingDict = []
+    
+    for(var i = 0 ; i < movingArray.length; i++){
+        movingDict[movingArray[i]] = movingChoices[i]
+    }
+    
+    for (var key in movingDict) {
+        $('#movingContainer').append("<li> Item Selected: " + key + "</li>")
+        if(movingDict[key]){
+            $('#movingContainer').append("<li>Your Action Step: " + movingDict[key] + "</li>")
+        }else{
+            $('#movingContainer').append("<li>You did not select an action step.</li>")
+        }
+    }
+    
+    var sleepingArray = JSON.parse(sessionStorage.getItem("sleepingArray"));
+    var sleepingChoices = JSON.parse(sessionStorage.getItem("sleepingChoices"));
+    var sleepingDict = []
+    
+    for(var i = 0 ; i < sleepingArray.length; i++){
+        sleepingDict[sleepingArray[i]] = sleepingChoices[i]
+    }
+    
+    for (var key in sleepingDict) {
+        $('#sleepingContainer').append("<li> Item Selected: " + key + "</li>")
+        if(sleepingDict[key]){
+            $('#sleepingContainer').append("<li>Your Action Step: " + sleepingDict[key] + "</li>")
+        }else{
+            $('#sleepingContainer').append("<li>You did not select an action step.</li>")
+        }
+    }
+</script>

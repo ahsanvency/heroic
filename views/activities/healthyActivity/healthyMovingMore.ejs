@@ -1,0 +1,135 @@
+<% include ../../partials/header/ %>
+
+<div class="container">
+<h1>Moving More</h1>
+
+    <p>Like on the previous page, you see a bunch of options listed below, this time for “moving more.” This part of the plan has to do with getting adequate exercise.  </p>
+
+    <p>Your task is to pick 3 items from this list. After you choose a particular item on this list (e.g., “get a pedometer”), you will need to provide details of you plan. For example, you could say: “I plan on getting a pedometer app and monitor how much I walk each day. I will enter the number of steps I took in my journal.” As with the “moving right” plan, note that you can choose to add something that’s not on our “moving more” list—such as, “join a cross fit class.” Again, don’t forget to come up with a plan that you can stick to.  </p>
+
+    <p>Once you have indicated 3 items in your “moving more” plan, click the “continue” button which will take you to my favorite part of the exercise: sleeping better.  </p>
+
+    <div id="container">
+      <div id="recordWalkingDiv"><input type="checkbox" value="recordWalking" name="recordWalking" id="recordWalking" class="checkbox"><label for="recordWalking">Get a pedometer and maintain a record of how much you have walked each day</label></div>
+
+      <div id="takeBreakDiv"><input type="checkbox" value="takeBreak" name="takeBreak" id="rtakeBreak" class="checkbox"><label for="takeBreak">  Put in reminders—on outlook or some other such program—to remind you to take a break every 20 – 30 minutes</label></div>
+
+      <div id="getTreadmillDiv"><input type="checkbox" value="getTreadmill" name="getTreadmill" id="getTreadmill" class="checkbox"><label for="getTreadmill">  Get a treadmill or elliptical machine for home (and use it every day for at least a few minutes)!</label></div>
+
+      <div id="morningExerciseDiv"><input type="checkbox" value="hmorningExercise" name="morningExercise" id="hmorningExercise" class="checkbox"><label for="hmorningExercise">  Exercise (doesn’t need to be intense) for 20 minutes to start the day off</label></div>
+
+      <div id="formGroupDiv"><input type="checkbox" value="formGroup" name="formGroup" id="formGroup" class="checkbox"><label for="formGroup"> Form a neighborhood exercise group and take a morning or evening walk/job/bike ride (or something else) together</label></div>
+
+      <div id="intenseActivityDiv"><input type="checkbox" value="intenseActivity" name="intenseActivity" id="intenseActivity" class="checkbox"><label for="intenseActivity"> Engage in short bursts of intense activity (to a level where you find it difficult to speak) </label></div>
+
+     <div id="lowerSittingDiv"><input type="checkbox" value="lowerSitting" name="lowerSitting" id="lowerSitting" class="checkbox"><label for="lowerSitting">  Lower amount of time spent sitting during (e.g., stand in a bus rather than sit)</label></div>
+
+     <div id="lowerTVDiv"><input type="checkbox" value="lowerTV" name="lowerTV" id="lowerTV" class="checkbox"><label for="lowerTV">  Lower amount of time spent sitting while watching TV</label></div>
+
+     <div id="ruleWalkDiv"><input type="checkbox" value="ruleWalk" name="ruleWalk" id="ruleWalk" class="checkbox"><label for="ruleWalk"> Make it a rule to walk if you are going somewhere less than X kilometers/miles away (you get to choose “X”)</label></div>
+
+     <div id="optionsContainer">
+
+     </div>
+
+     <input type="text" name="" placeholder="Insert New Item">
+
+    </div>
+    <p>Once you have come up with a plan for “eating right,” click the “continue” button, which will take you to the next page.</p>
+    
+    <a class="btn btn-primary active" href="/activities/healthyEatingRight"><-Eating Right</a>
+    <!--<a class="btn btn-primary active" id="merge_button" onclick="checkThreemovingChoices()">Check clicks</a>-->
+    <a class="btn btn-primary active" id="merge_button" href="/activities/healthySleepingBetter">Sleeping Better -></a>
+    <!--<a class="btn btn-primary active" id="merge_button" href="#">Check clicks</a>-->
+
+
+  </div>
+
+    
+    
+<% include ../../partials/footer/ %>
+
+<script>
+
+  
+    
+    var movingMoreVals = [];
+    var movingChoices =[]
+        
+    $("#merge_button").click(function(event){
+        $(":checkbox:checked").each(function() {
+            movingChoices.push($(this).next('label').next('input').val())
+            movingMoreVals.push($(this).next('label').text());
+        })
+        sessionStorage.setItem('movingArray', JSON.stringify(movingMoreVals));
+        sessionStorage.setItem('movingChoices', JSON.stringify(movingChoices));
+    });
+    
+    
+    function inputDynamic(){
+      $(".checkbox").each(function(){
+          $("#" + $(this).val() + "Div").append('<input id="' + $(this).val() + 'Input" name="' + $(this).val() + 'Input" size="50" type="text" input>')
+          if($(this).is(":checked") == false){
+              $('input[name="' + $(this).val() + 'Input"]').hide();
+          }
+        });
+        
+        //show it when the checkbox is clicked
+        $('.checkbox').on('click', function () {
+            if ($(this).prop('checked')) {
+                $('input[name="' + $(this).val() + 'Input"]').fadeIn();
+            } else {
+                $('input[name="' + $(this).val() + 'Input"]').hide();
+            }
+    }); 
+}
+
+function inputDynamic(){
+      $(".checkbox").each(function(){
+          $("#" + $(this).val() + "Div").append('<input id="' + $(this).val() + 'Input" name="' + $(this).val() + 'Input" size="50" type="text" input>')
+          if($(this).is(":checked") == false){
+              $('input[name="' + $(this).val() + 'Input"]').hide();
+          }
+        });
+        
+        //show it when the checkbox is clicked
+        $('.checkbox').on('click', function () {
+            if ($(this).prop('checked')) {
+                $('input[name="' + $(this).val() + 'Input"]').fadeIn();
+            } else {
+                $('input[name="' + $(this).val() + 'Input"]').hide();
+            }
+    }); 
+}
+
+    
+    inputDynamic();
+    inputPressed();
+
+    
+    function checkThreeChoices(){
+    	if ($(":checkbox:checked").length < 3){
+    		alert("Please Select Three Choices")
+    	}else{
+    		window.location.href = "/activities/healthyTEST"
+    	}
+    }
+    
+    function inputPressed(){
+    
+    	$("#container").on("keypress", "input", function(event){
+    		if(event.which === 13){
+    			var newItem = $(this).val();
+    			var id = newItem.slice(0, 5);
+    			$(this).val("");
+    			
+    			var input = document.createElement("div");
+    			input.innerHTML = '<div id=' + id + 'Div>' + 
+    			'<input type="checkbox" value=' + id + ' name="' + id + '" id=' + id + '" class="checkbox">' + 
+    			'<label for=' + id + '>' +
+    			newItem + '</label></div>'
+    			$("#optionsContainer").append(input)
+    	}
+    	})
+    }
+</script>

@@ -18,4 +18,9 @@ router.get("/activities/myJournal", function(req, res) {
     res.render("activities/journalingActivity/myJournal");
 })
 
+// router.get('/activities/customJournal', function(req, res) {
+//     var jouranlingArray = JSON.parse(sessionStorage.getItem("theArray"));
+//     console.log(jouranlingArray);
+// })
+
 module.exports = router
