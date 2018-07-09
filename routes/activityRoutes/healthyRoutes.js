@@ -23,6 +23,4 @@ router.get("/activities/healthyTEST", function(req, res){
 });
 
 
-
-
 module.exports = router

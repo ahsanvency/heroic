@@ -3,7 +3,8 @@ var mongoose                = require("mongoose"),
 
 var UserSchema = new mongoose.Schema({
     username: String, 
-    password: String
+    password: String,
+    journaling: {}
 })
 
 UserSchema.plugin(passportLocalMongoose); //This gives all the important fucntions and methods to the user model

@@ -1,5 +1,7 @@
 <% include ../../partials/header/ %>
 
+<div class=container>
+
 <h1>Personalizing Your Journal</h1>
 
 	<p>As you will soon learn from HEROIC (the online course on employee happiness), maintaining a journal is pertinent to living a happier and more fulfilling life. A big reason for this is it helps you reflect on the day's events which helps you understand how and why events that happened to you are meaningful. This is why the centerpiece of the journal is titled "3 Significant Events and Why". Journaling helps you reflect on significant events in your life and helps you get out of your head by putting your thoughts on something physical.</p>
@@ -51,31 +53,24 @@
 				<input type="text" name="" placeholder="Enter New Item" class="healthyInput">
 				
 				<div class="healthyElement" id ="Eat Healthy"><input type="checkbox" name="Eat Healthy" id="eatHealthy"> <label for="eatHealthy">Eat Healthy</label>  <span class="elementDelete">X</span></div>
-
 				<div class="healthyElement" id ="Exercise Well"><input type="checkbox" name="Exercise Well" id="exerciseWell"> <label for="exerciseWell">Exercise Well</label> <span class="elementDelete">X</span></div>
-
 				<div class="healthyElement" id="Sleep Correctly"><input type="checkbox" name="Sleep Correctly" id="sleepCorrectly"> <label for="sleepCorrectly">Sleep Correctly</label> <span class="elementDelete">X</span></div>
 			</div>
 			
 		</div>
 
 
-		
-
 		<p></p>
 
 		<label class="addJournalingLabel" for="journalingSelector">Add parts to your journaling template here:  </label>
 		<select id="journalingSelector" name="journalingOptions" onchange="getValue();">
 			<option value="default" title="Select Journaling Addition">Select Journaling Addition</option>
-			<!-- <option value="healthyHabits" title="Healthy Habits">Healthy Habits</option> -->
 			<option value="threeGratitudes" title="3 Gratitudes">3 Gratitudes</option>
 			<option value="threeKindness" title="3 Acts of Kindness">3 Acts of Kindness</option>
 			<option value="threeLessons" title="3 Lessons">3 Lessons</option>
 			<option value="toDoList" title="Todo List">Todo List</option>
 
 		</select>
-
-
 
 		<p></p>
 
@@ -97,6 +92,7 @@
   	<!--<a id="store" href="#" class="btn btn-link"> See my journal -></a>-->
 
 	<p></p>
+</div>
 	
 <script>
 	var testArray = ["healthyHabits", "threeGratitudes", "threeKindness", "threeLessons", "toDoList"]
@@ -106,7 +102,7 @@
 	$('#store').on('click', function(){
 		$("#journalingSelector > option").each(function() {
 			var index = testArray.indexOf($(this).val());
-			if (index >= 1) {
+			if (index >= 0) {
 				delete testArray[index]
 			}
 		});
@@ -124,17 +120,18 @@
 		$("div").on("click", "span", function(event){
 		$(this).parent().fadeOut(500, function(){
 			
-			// var addJournal = document.getElementById("journalingSelector");
 			if (this.id === "healthyContainer"){
+				console.log(this.id)
 				$("#journalingSelector").append('<option value="healthyHabits" title="Healthy Habits">Healthy Habits</option>')
+				
 			}
-			else if(this.id === "threeGratitudesContainer"){
+			else if(this.id === "GratitudeContainer"){
 				$("#journalingSelector").append('<option value="threeGratitudes" title="3 Gratitudes">3 Gratitudes</option>')
 			}
-			else if(this.id === "threeKindnessContainer"){
+			else if(this.id === "KindnessContainer"){
 				$("#journalingSelector").append('<option value="threeKindness" title="3 Acts of Kindness">3 Acts of Kindness</option>')
 			}
-			else if(this.id === "threeLessonsContainer"){
+			else if(this.id === "LessonsContainer"){
 				$("#journalingSelector").append('<option value="threeLessons" title="3 Lessons">3 Lessons</option>')
 			}
 			else if(this.id === "toDoListContainer"){
@@ -164,7 +161,6 @@
 				var newItem = $(".healthyInput").val();
 				$(".healthyInput").val("");
 				healthyArray.push(newItem)
-				console.log(healthyArray)
 				var input = document.createElement("div");
 				input.className = "healthyElement"
 				input.id = newItem
@@ -183,7 +179,6 @@
 				var newItem = $(".toDoInput").val();
 				$(".toDoInput").val("");
 				toDoArray.push(newItem);
-				console.log(toDoArray);
 				var input = document.createElement("div");
 				input.className = "toDoElement"
 				input.id = newItem
@@ -202,7 +197,6 @@
 		var addJournal = document.getElementById("journalingSelector");
 		var selectedValue = addJournal.value;
 		var container = document.getElementById("container");
-		var healthyContainer = document.getElementById("originalHealthyContainer")
 	
 		if (selectedValue === "healthyHabits"){
 			container.append(createHealthForm());
@@ -214,7 +208,7 @@
 		}
 	
 		else if (selectedValue === "threeGratitudes"){
-			container.append(createThreeGratitudes());
+			container.append(createThree("Gratitude", "3 Things I Am Grateful For"));
 			for (var i=0; i < addJournal.length; i++){
 	  			if (addJournal.options[i].value == 'threeGratitudes' ){
 	  				addJournal.remove(i);
@@ -223,7 +217,7 @@
 		}
 	
 		else if (selectedValue === "threeKindness"){
-			container.append(createThreeKindness());
+			container.append(createThree("Kindness", "3 Acts of Kindess"))
 			for (var i=0; i < addJournal.length; i++){
 	  			if (addJournal.options[i].value == 'threeKindness' ){
 	  				addJournal.remove(i);
@@ -231,7 +225,7 @@
 	  		}
 		}
 		else if (selectedValue === "threeLessons"){
-			container.append(createThreeLessons());
+			container.append(createThree("Lessons", "3 Lessons I Learned Today"))
 			for (var i=0; i < addJournal.length; i++){
 	  			if (addJournal.options[i].value == 'threeLessons' ){
 	  				addJournal.remove(i);
@@ -246,12 +240,8 @@
 	  			}
 	  		}
 		}
-	
 		removeItem()
 	}
-	
-	
-	
 	
 	
 	function createHealthForm(){
@@ -259,142 +249,37 @@
 		var d = document.createElement("div")
 		d.id = "healthyContainer"
 		d.className = "journalingContainer"
-	
-	
-		var s = document.createElement("span");
-		s.innerHTML = "X"
-		s.className = "containerDelete"
-		d.append(s);
-	
-		var title = document.createElement("h1");
-		title.innerHTML = "Healthy Lifestyle & Habits";
-		d.append(title);
-	
-			var input = document.createElement("input");
-			input.type = "text"
-			input.className = "healthyInput"
-			input.placeholder = "Insert New Item"
-	
-			d.append(input)
-	
-			var input1 = document.createElement("div");
-			input1.id = "Eat Healthy"
-			input.className = "healthyElement"
-			input1.innerHTML = '<input type="checkbox" name="Eat Healthy"' + 
-			' id="eatHealthy"> <label for="eatHealthy">Eat Healthy</label> ' + 
-			'<span>X</span>'
-			d.append(input1)
-	
-			var input2 = document.createElement("div");
-			input2.id = "Exercise Well"
-			input2.className = "healthyElement"
-			input2.innerHTML = '<input type="checkbox" name="Exercise Well"' + 
-			' id="exerciseWell"> <label for="exerciseWell">Exercise Well</label> ' + 
-			'<span>X</span>'
-			d.append(input2)
-	
-			var input3 = document.createElement("div");
-			input3.id = "Sleep Correctly"
-			input3.className = "healthyElement"
-			input3.innerHTML =  '<input type="checkbox" name="Sleep Correctly"' + 
-			' id="sleepCorrectly"> <label for="sleepCorrectly">Sleep Correctly</label> ' + 
-			'<span>X</span>'
-			d.append(input3)
-	
-		return d;
 		
-		presed()
-	}
-	
-	
-	function createThreeGratitudes(){
-		var d = document.createElement("div")
-		d.id = "threeGratitudesContainer"
-		d.className = "journalingContainer"
-	
-	
-		var s = document.createElement("span");
-		s.innerHTML = "X"
-		s.className = "containerDelete"
-		d.append(s);
-	
-		var title = document.createElement("h1");
-		title.innerHTML = "3 Gratitudes"
-		d.append(title);
-	
-		var input1 = document.createElement("div");
-		input1.innerHTML = '<label for="firstGratitude">1.</label>  <input type="text" name="" id="firstGratitude">'
-		d.append(input1)
-	
-		var input2 = document.createElement("div");
-		input2.innerHTML = '<label for="secondGratitude">2.</label> <input type="text" name="" id="secondGratitude">'
-		d.append(input2)
-	
-		var input3 = document.createElement("div");
-		input3.innerHTML = '<label for="thirdGratitude">3.</label> <input type="text" name="" id="thirdGratitude">'
-		d.append(input3)
-	
+		d.append(createSpan());
+		d.append(createTitle("Healthy Lifestyle & Habits"));
+		d.append(createInput("healthyInput"))
+			
+		healthyArray.forEach(function(element){
+			var input = document.createElement("div");
+			input.id = element
+			input.className = "healthyElement"
+			input.innerHTML = '<input type="checkbox" name="' + element + '"' + 
+			' id="eatHealthy"> <label for="eatHealthy">' + element + '</label> ' + 
+			'<span>X</span>'
+			d.append(input)
+		})
+			
 		return d;
 	}
 	
-	
-	function createThreeKindness(){
+	function createThree(name, title){
 		var d = document.createElement("div")
-		d.id = "threeKindnessContainer"
+		d.id =  name + "Container"
 		d.className = "journalingContainer"
 	
-	
-		var s = document.createElement("span");
-		s.innerHTML = "X"
-		s.className = "containerDelete"
-		d.append(s);
-	
-		var title = document.createElement("h1");
-		title.innerHTML = "3 Acts of Kindness"
-		d.append(title);
-	
-		var input1 = document.createElement("div");
-		input1.innerHTML = '<label for="firstKindness">1.</label> <input type="text" name="" id="firstKindness">'
-		d.append(input1)
-	
-		var input2 = document.createElement("div");
-		input2.innerHTML = '<label for="secondKindness">2.</label> <input type="text" name="" id="secondKindness">'
-		d.append(input2)
-	
-		var input3 = document.createElement("div");
-		input3.innerHTML = '<label for="thirdKindness">3.</label> <input type="text" name="" id="thirdKindness">'
-		d.append(input3)
-	
-		return d;
-	}
-	
-	function createThreeLessons(){
-		var d = document.createElement("div")
-		d.id = "threeLessonsContainer"
-		d.className = "journalingContainer"
-	
-	
-		var s = document.createElement("span");
-		s.innerHTML = "X"
-		s.className = "containerDelete"
-		d.append(s);
-	
-		var title = document.createElement("h1");
-		title.innerHTML = "3 Lessons I Learned"
-		d.append(title);
-	
-		var input1 = document.createElement("div");
-		input1.innerHTML = '<label for="firstLesson">1.</label> <input type="text" name="" id="firstLesson">'
-		d.append(input1)
-	
-		var input2 = document.createElement("div");
-		input2.innerHTML = '<label for="secondLesson">2.</label> <input type="text" name="" id="secondLesson">'
-		d.append(input2)
-	
-		var input3 = document.createElement("div");
-		input3.innerHTML = '<label for="thirdLesson">3.</label> <input type="text" name="" id="thirdLesson">'
-		d.append(input3)
-	
+		d.append(createSpan());
+		d.append(createTitle(title));
+		
+		for (var i = 1; i < 4; i++) {
+			var input = document.createElement("div");
+			input.innerHTML = '<label for="' + i + name +'">' + i + '.</label>  <input type="text" name="" id="' + i + name +'">'
+			d.append(input)
+		}
 		return d;
 	}
 	
@@ -403,30 +288,37 @@
 		d.id = "toDoListContainer"
 		d.className = "journalingContainer"
 	
-	
-		var s = document.createElement("span");
-		s.innerHTML = "X"
-		s.className = "containerDelete"
-		d.append(s);
-	
-		var title = document.createElement("h1");
-		title.innerHTML = "To-Do List for Tomorrow";
-		d.append(title);
-	
-		var input = document.createElement("input");
-		input.type = "text"
-		input.className = "toDoInput"
-		input.placeholder = "Insert New Item"
-	
-		d.append(input)
+		d.append(createSpan());
+		d.append(createTitle("To-Do List for Tomorrow"));
+		d.append(createInput("toDoInput"))
 	
 		var headers = document.createElement("div");
 		headers.innerHTML = "<h4>Imp Urg</h4>"
 		d.append(headers)
 	
 		return d;
-	
 		toDoListPressed();
+	}
+	
+	function createSpan(){
+		var s = document.createElement("span");
+		s.innerHTML = "X"
+		s.className = "containerDelete"
+		return s
+	}
+	
+	function createTitle(titleStr){
+		var title = document.createElement("h1");
+		title.innerHTML = titleStr
+		return title
+	}
+	
+	function createInput(inputClass){
+		var input = document.createElement("input");
+		input.type = "text"
+		input.className = inputClass
+		input.placeholder = "Insert New Item"
+		return input
 	}
 </script>
 

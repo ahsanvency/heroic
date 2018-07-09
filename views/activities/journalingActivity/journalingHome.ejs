@@ -1,5 +1,11 @@
 <% include ../../partials/header/ %>
 
+<div class="container">
+	
+	<%if (journalingExists){%>
+		<a class="btn btn-primary active" href="/activities/customJournal">See My Custom Journal</a>
+	<%}%>
+
 <h1 class="title">Welcome to Happiness Activity #1: Journaling</h1>
 
 <h3>This is the very first happiness activity on your HEROIC journey, and arguably the most important one!</h3>
@@ -18,5 +24,6 @@
 <h5>These <a href="/comments">comments</a> by users can also help you decide which option to pick.</h5>
 
 <a href="/activities/personalizeJournal" class="btn btn-link">Create My Journal</a>
+</div>
 	
 <% include ../../partials/footer/ %>
