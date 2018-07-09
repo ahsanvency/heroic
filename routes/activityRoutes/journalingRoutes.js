@@ -12,7 +12,6 @@ router.get("/activities/journalingHome", function(req, res){
         User.findById(req.user._id, function(err, foundUser){
         if(err){
             console.log(err)
-            res.render("activities/journalingActivity/journalingHome", {journalingExists: journalingExists})
         }else{
             if(foundUser.journaling != null){
                 journalingExists = true
@@ -20,6 +19,8 @@ router.get("/activities/journalingHome", function(req, res){
             res.render("activities/journalingActivity/journalingHome", {journalingExists: journalingExists})
         }
     })
+    }else{
+        res.render("activities/journalingActivity/journalingHome", {journalingExists: journalingExists})
     }
 });
 
@@ -45,6 +46,7 @@ router.post('/activities/journalTEST', function(req, res) {
             console.log(err)
         }else{
             foundUser.journaling = newJournaling;
+            console.log(foundUser.journaling)
             foundUser.save(function(err, user){
                 if(err){
                     console.log(err)
@@ -61,6 +63,7 @@ router.get("/activities/customJournal", function(req, res) {
         if(err){
             console.log(err)
         }else{
+            // console.log(foundUser.journaling)
             res.render("activities/journalingActivity/customJournal", {journaling: foundUser.journaling})
         }
     })
