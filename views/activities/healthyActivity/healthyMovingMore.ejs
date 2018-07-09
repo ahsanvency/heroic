@@ -39,7 +39,7 @@
     
     <a class="btn btn-primary active" href="/activities/healthyEatingRight"><-Eating Right</a>
     <!--<a class="btn btn-primary active" id="merge_button" onclick="checkThreemovingChoices()">Check clicks</a>-->
-    <a class="btn btn-primary active" id="merge_button" href="/activities/healthySleepingBetter">Sleeping Better -></a>
+    <a class="btn btn-primary active" id="merge_button" onclick="checkThreeChoices()">Sleeping Better -></a>
     <!--<a class="btn btn-primary active" id="merge_button" href="#">Check clicks</a>-->
 
 
@@ -66,23 +66,23 @@
     });
     
     
-    function inputDynamic(){
-      $(".checkbox").each(function(){
-          $("#" + $(this).val() + "Div").append('<input id="' + $(this).val() + 'Input" name="' + $(this).val() + 'Input" size="50" type="text" input>')
-          if($(this).is(":checked") == false){
-              $('input[name="' + $(this).val() + 'Input"]').hide();
-          }
-        });
+//     function inputDynamic(){
+//       $(".checkbox").each(function(){
+//           $("#" + $(this).val() + "Div").append('<input id="' + $(this).val() + 'Input" name="' + $(this).val() + 'Input" size="50" type="text" input>')
+//           if($(this).is(":checked") == false){
+//               $('input[name="' + $(this).val() + 'Input"]').hide();
+//           }
+//         });
         
-        //show it when the checkbox is clicked
-        $('.checkbox').on('click', function () {
-            if ($(this).prop('checked')) {
-                $('input[name="' + $(this).val() + 'Input"]').fadeIn();
-            } else {
-                $('input[name="' + $(this).val() + 'Input"]').hide();
-            }
-    }); 
-}
+//         //show it when the checkbox is clicked
+//         $('.checkbox').on('click', function () {
+//             if ($(this).prop('checked')) {
+//                 $('input[name="' + $(this).val() + 'Input"]').fadeIn();
+//             } else {
+//                 $('input[name="' + $(this).val() + 'Input"]').hide();
+//             }
+//     }); 
+// }
 
 function inputDynamic(){
       $(".checkbox").each(function(){
@@ -111,7 +111,7 @@ function inputDynamic(){
     	if ($(":checkbox:checked").length < 3){
     		alert("Please Select Three Choices")
     	}else{
-    		window.location.href = "/activities/healthyTEST"
+    		window.location.href = "/activities/healthySleepingBetter"
     	}
     }
     

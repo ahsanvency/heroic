@@ -49,7 +49,12 @@ span{
   opacity: 1.0;
 }
 
-.element:hover .elementDelete{
+.healthyElement:hover .elementDelete{
+  width: 30px;
+  opacity: 1.0;
+}
+
+.toDoElement:hover .elementDelete{
   width: 30px;
   opacity: 1.0;
 }
