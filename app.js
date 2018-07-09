@@ -13,8 +13,8 @@ var activityRoutes      = require("./routes/activityRoutes/activitiesHome"),
     authRoutes          = require("./routes/auth")
     
 // console.log(process.env.DATABASEURL)
-mongoose.connect("mongodb://localhost:27017/heroicDB", { useNewUrlParser: true })
-// mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true })
+// mongoose.connect("mongodb://localhost:27017/heroicDB", { useNewUrlParser: true })
+mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true })
 // mongoose.connect("mongodb://av:password1@ds127851.mlab.com:27851/heroic");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs")
