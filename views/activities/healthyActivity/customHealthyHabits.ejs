@@ -1,0 +1,98 @@
+<% include ../../partials/header/ %>
+
+<div class="container">
+    <div id=eatingContainer>
+        <h1>Eating Right</h1>
+    </div>
+    
+    <div id=movingContainer>
+        <h1>Moving More</h1>
+    </div>
+    
+    <div id=sleepingContainer>
+        <h1>Sleeping Better</h1>
+    </div>
+    
+  	</div>
+</div>
+
+
+
+<% include ../../partials/footer/ %>
+
+
+<script>
+    var healthyOptions = <%-JSON.stringify(healthyHabits)%>
+
+
+    var eatingArray = healthyOptions.eatingArray
+    var eatingChoices = healthyOptions.eatingChoices
+    var eatingDict = []
+    
+    for(var i = 0 ; i < eatingArray.length; i++){
+        eatingDict[eatingArray[i]] = eatingChoices[i]
+    }
+    
+    for (var key in eatingDict) {
+        
+        if(eatingDict[key]){
+            $('#eatingContainer').append('<div id=' + key + 'Div>' + 
+    			'<input type="checkbox" value=' + key + ' name="' + key + '" id=' + key + '" class="checkbox">' + 
+    			'<label for=' + key + '>' +
+    			key + '</label> (' + eatingDict[key] + ')</div>')
+        }else{
+            $('#eatingContainer').append('<div id=' + key + 'Div>' + 
+    			'<input type="checkbox" value=' + key + ' name="' + key + '" id=' + key + '" class="checkbox">' + 
+    			'<label for=' + key + '>' +
+    			key + '</label></div>' )
+        }
+    }
+    
+    var movingArray = healthyOptions.movingArray
+    var movingChoices = healthyOptions.movingChoices
+    var movingDict = []
+    
+    for(var i = 0 ; i < movingArray.length; i++){
+        movingDict[movingArray[i]] = movingChoices[i]
+    }
+    
+    for (var key in movingDict) {
+        
+        if(movingDict[key]){
+            $('#movingContainer').append('<div id=' + key + 'Div>' + 
+    			'<input type="checkbox" value=' + key + ' name="' + key + '" id=' + key + '" class="checkbox">' + 
+    			'<label for=' + key + '>' +
+    			key + '</label> (' + movingDict[key] + ')</div>')
+        }else{
+            $('#movingContainer').append('<div id=' + key + 'Div>' + 
+    			'<input type="checkbox" value=' + key + ' name="' + key + '" id=' + key + '" class="checkbox">' + 
+    			'<label for=' + key + '>' +
+    			key + '</label></div>')
+        }
+    }
+    
+    var sleepingArray = healthyOptions.sleepingArray
+    var sleepingChoices = healthyOptions.sleepingChoices
+    var sleepingDict = []
+    
+    for(var i = 0 ; i < sleepingArray.length; i++){
+        sleepingDict[sleepingArray[i]] = sleepingChoices[i]
+    }
+    
+    for (var key in sleepingDict) {
+        
+    			
+        
+        if(sleepingDict[key]){
+            $('#sleepingContainer').append('<div id=' + key + 'Div>' + 
+    			'<input type="checkbox" value=' + key + ' name="' + key + '" id=' + key + '" class="checkbox">' + 
+    			'<label for=' + key + '>' +
+    			key + '</label> (' + sleepingDict[key] + ')</div>')
+        }else{
+            $('#sleepingContainer').append('<div id=' + key + 'Div>' + 
+    			'<input type="checkbox" value=' + key + ' name="' + key + '" id=' + key + '" class="checkbox">' + 
+    			'<label for=' + key + '>' +
+    			key + '</label></div>')
+        }
+    }
+</script>

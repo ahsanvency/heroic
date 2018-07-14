@@ -2,7 +2,6 @@ var express     = require("express"),
     router      = express.Router(),
     app         = express(),
     User        = require("../../models/user"),
-    Journaling  = require("../../models/journaling"),
     middleware = require("../../middleware")
     
     
@@ -46,7 +45,6 @@ router.post('/activities/journalTEST', function(req, res) {
             console.log(err)
         }else{
             foundUser.journaling = newJournaling;
-            console.log(foundUser.journaling)
             foundUser.save(function(err, user){
                 if(err){
                     console.log(err)

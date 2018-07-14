@@ -12,6 +12,12 @@
     <div id=sleepingContainer>
         <h1>Sleeping Better</h1>
     </div>
+    
+    <% if(currentUser){ %>
+		<!--<button id="sendButton" onclick="sendInfo(event)">Submit</button>-->
+		<button id="sendButton">Save My Healthy Habits</button>
+	<%}%>
+  	</div>
 </div>
 
 
@@ -69,4 +75,28 @@
             $('#sleepingContainer').append("<li>You did not select an action step.</li>")
         }
     }
+    
+    
+    $("#sendButton").click(function(event){
+
+        $.ajax({
+        	type: "POST",
+            url: '/activities/healthyTEST',
+            data: {
+                arrayEating : eatingArray,
+                choicesEating: eatingChoices,
+                arrayMoving: movingArray,
+                choicesMoving: movingChoices,
+                arraySleeping : sleepingArray,
+                choicesSleeping: sleepingChoices
+            },
+            contentType: "application/x-www-form-urlencoded",
+            success: function(){
+                window.location.href = "/activities/healthyTEST";
+            },
+            error: function(){
+                console.log("DID NOT WORK")
+            }
+        })
+})
 </script>
