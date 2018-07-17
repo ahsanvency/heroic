@@ -1,0 +1,51 @@
+<% include ../../partials/header/ %>
+
+<div class="container">
+  
+	
+	<h1>Avoiding Debbie Downers Step 3</h1>
+	
+	<p>Step 2 involves coming up with a plan to avoid the two Debbie Downers that you listed on the previous page—as simple as that. For instance, if a particular coworker gets you down on a consistent basis, figure out a way to avoid hanging out with that coworker—particularly before important meetings or events. If what gets you down and feeling negative is spending too much time on the Internet, download software (e.g., Toggl or tracking time) that monitors time spent online, and set limits for yourself. </p>
+    
+    
+    <div>
+        <div id="debbie1"></div>
+        <textarea class="textArea" id="action1"></textarea>
+    </div>
+    
+    <div id="debbie2"></div>
+    <div>
+        <div id="debbie2"></div>
+        <textarea class="textArea" id="action2"></textarea>
+    </div>
+    
+	
+	
+	<button><a>Continue</a></button>
+	<!--<button><a href="#">Continue</a></button>-->
+
+<% include ../../partials/footer/ %>
+
+<script>
+    var actionArray = [];
+    var debbieArray = JSON.parse(sessionStorage.getItem("debbieArray"));
+    
+    
+    $('#debbie1').append("How do you plan on avoiding: " + debbieArray[0] )
+    $('#debbie2').append("How do you plan on avoiding: " + debbieArray[1] )
+    
+    $("button").click(function(event) {
+        
+        if($('#action1').val() !== '' && $('#action2').val() !== ''){
+            actionArray.push($('#action1').val());
+            actionArray.push($('#action2').val());
+            sessionStorage.setItem('actionArray', JSON.stringify(actionArray));
+            console.log(debbieArray);
+            console.log(actionArray)
+    		window.location.href= "/activities/debbieStep4"
+        }else{
+            alert("Please fill out both fields")
+        }
+    });
+    
+</script>

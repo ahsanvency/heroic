@@ -5,7 +5,8 @@ var UserSchema = new mongoose.Schema({
     username: String, 
     password: String,
     journaling: {},
-    healthyHabits: {}
+    healthyHabits: {},
+    debbieDowner: {}
 })
 
 UserSchema.plugin(passportLocalMongoose); //This gives all the important fucntions and methods to the user model

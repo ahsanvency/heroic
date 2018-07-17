@@ -1,0 +1,56 @@
+<% include ../../partials/header/ %>
+
+<div class="container">
+  
+	
+	<h1>Avoiding Debbie Downers Step 4</h1>
+	
+    <div>
+        <div id="debbie1">Debbie Downer: </div>
+        <div id="action1">Plan To Avoid: </div>
+    </div>
+    
+    <div>
+        <div id="debbie2">Debbie Downer: </div>
+        <div id="action2">Plan To Avoid: </div>
+    </div>
+    
+    <% if(currentUser){ %>
+		<!--<button id="sendButton" onclick="sendInfo(event)">Submit</button>-->
+		<button id="sendButton">Save My Healthy Habits</button>
+	<%}%>
+	
+<% include ../../partials/footer/ %>
+
+<script>
+    
+    var debbieArray = JSON.parse(sessionStorage.getItem("debbieArray"));
+    var actionArray = JSON.parse(sessionStorage.getItem("actionArray"));
+    
+    
+    $('#debbie1').append(debbieArray[0])
+    $('#debbie2').append(debbieArray[1]) 
+    $('#action1').append(actionArray[0])
+    $('#action2').append(actionArray[1])
+    
+    
+    $("#sendButton").click(function(event){
+
+        $.ajax({
+        	type: "POST",
+            url: '/activities/debbiePOST',
+            data: {
+                debbieArray: debbieArray,
+                actionArray: actionArray
+            },
+            contentType: "application/x-www-form-urlencoded",
+            success: function(){
+                window.location.href = "/activities/debbiePOST";
+            },
+            error: function(){
+                console.log("DID NOT WORK")
+            }
+        })
+})
+    
+</script>

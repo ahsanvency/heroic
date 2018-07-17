@@ -1,0 +1,47 @@
+<% include ../../partials/header/ %>
+
+<div class="container">
+  
+	
+	<h1>Avoiding Debbie Downers</h1>
+	
+	<p>Step 1 involves listing two of your most common “downers” at work—people, activities, things—that get you down, feeling low. For instance, perhaps one of your coworkers brings you down or is constantly negative. Or perhaps you spend too much time on the Internet, which brings you down. Or, it could be that you feel you don’t have the authority or power to change things—act on a creative idea. 
+	    List two things that you feel you can change, even if only minimally, rather than things on which you have absolutely no control. 
+    </p>
+    
+    <div>
+        <label>First Debbie Downer: </label>
+        <p></p>
+        <textarea class="textArea" id="debbie1"></textarea>
+    </div>
+    
+    <div>
+        <label>Second Debbie Downer: </label>
+        <p></p>
+        <textarea class="textArea" id="debbie2"></textarea>
+    </div>
+    
+	
+	
+	<button><a>Continue</a></button>
+	<!--<button><a href="#">Continue</a></button>-->
+
+<% include ../../partials/footer/ %>
+
+<script>
+    var debbieArray =[]
+
+    $("button").click(function(event) {
+        if($('#debbie1').val() !== '' && $('#debbie2').val() !== ''){
+            debbieArray.push($('#debbie1').val());
+            debbieArray.push($('#debbie2').val());
+            sessionStorage.setItem('debbieArray', JSON.stringify(debbieArray));
+    		window.location.href= "/activities/debbieStep3"
+        }else{
+            alert("Please fill out both fields")
+        }
+    });
+    
+    
+    
+</script>
