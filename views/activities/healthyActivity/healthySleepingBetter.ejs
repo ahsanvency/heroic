@@ -54,6 +54,7 @@
     var sleepingChoices = []
         
     $("#merge_button").click(function(event){
+        sleepingChoices = []
         $(":checkbox:checked").each(function() {
             sleepingChoices.push($(this).next('label').next('input').val())
             sleepingbetterVals.push($(this).next('label').text());

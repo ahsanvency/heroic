@@ -1,0 +1,109 @@
+<% include ../../partials/header/ %>
+
+<div class="container">
+	
+	<h1>Activity 4: Page #3 Heros Values</h1>
+	
+	<p>Step 2 involves coming up the qualities that you admire about the top 3 heroes you have identified. 
+	For each hero list 3-4 traits/values you admire about them</p>
+	
+	<div id="heroDiv1">
+	    <h1 class="heros">Name of Hero</h1>
+	    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/-Insert_image_here-.svg/320px--Insert_image_here-.svg.png"></img>
+	    <div id="heroValues1">
+
+     </div>
+
+     <input id="inputField1" type="text" name="" placeholder="Enter Values of Hero 1">
+     <button id="addInput1">Add Value</button>
+	
+	</div>
+	
+	<div id="heroDiv2">
+	    <h1 class="heros">Name of Hero</h1>
+	    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/-Insert_image_here-.svg/320px--Insert_image_here-.svg.png"></img>
+	    <div id="heroValues2">
+
+     </div>
+
+     <input id="inputField2" type="text" name="" placeholder="Enter Values of Hero 2">
+     <button id="addInput2">Add Value</button>
+	
+	</div>
+	
+	<div id="heroDiv3">
+	    <h1 class="heros">Name of Hero</h1>
+	    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/-Insert_image_here-.svg/320px--Insert_image_here-.svg.png"></img>
+	    <div id="heroValues3">
+
+     </div>
+
+     <input id="inputField3" type="text" name="" placeholder="Enter Values of Hero 3">
+     <button id="addInput3">Add Value</button>
+	
+	</div>
+	
+	<p></p>
+    <button><a id="valuesAdded">Continue</a></button>
+    
+ </div>
+
+
+<% include ../../partials/footer/ %>
+
+<script>
+    var herosArray = JSON.parse(sessionStorage.getItem("herosArray"));
+    var valuesArray = [];
+    // console.log()
+    // $("#name1").text()
+    
+    $(document).ready(function() {
+        for(var i = 0, elems = document.querySelectorAll('.heros'); i < elems.length; i++) { 
+            elems[i].innerHTML = herosArray[i];
+        }
+        for(var i = 0, elems = document.querySelectorAll('input'); i < elems.length; i++) { 
+            elems[i].placeholder = "Values of: " + herosArray[i];
+        }
+    });
+    
+    $("#addInput1").click(function(event) {
+		if($("#inputField1").val() !== ''){
+			var newItem = $("#inputField1").val();
+			valuesArray.push(newItem)
+			$("#inputField1").val("")
+			var id = newItem.slice(0, 5);
+			$("#heroValues1").append("<li>" + newItem + "</li>")
+		}
+	})
+	
+	$("#addInput2").click(function(event) {
+		if($("#inputField2").val() !== ''){
+			var newItem = $("#inputField2").val();
+			valuesArray.push(newItem)
+			$("#inputField2").val("")
+			var id = newItem.slice(0, 5);
+			$("#heroValues2").append("<li>" + newItem + "</li>")
+		}
+	})
+	
+	$("#addInput3").click(function(event) {
+		if($("#inputField3").val() !== ''){
+			var newItem = $("#inputField3").val();
+			valuesArray.push(newItem)
+			$("#inputField3").val("")
+			var id = newItem.slice(0, 5);
+			$("#heroValues3").append("<li>" + newItem + "</li>")
+		}
+	})
+	
+	$("#valuesAdded").click(function(){
+	    if(valuesArray.length < 5){
+	        alert("Please select atleast 5 values")
+	    }else{
+	        sessionStorage.setItem('valuesArray', JSON.stringify(valuesArray));
+	        window.location.href ="/activities/chooseValues"
+	    }
+	})
+	
+	
+</script>

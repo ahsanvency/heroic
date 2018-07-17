@@ -1,0 +1,68 @@
+<% include ../../partials/header/ %>
+
+<div class="container">
+  
+	<h1>Activity 4: Identifying core and shadow values</h1>
+	
+	<p>Step 1 involves listing three of your most admired heroes—the set of people that have, and continue to, inspire you. 
+		(Tip: You can enter these names into the input field then check the top 3 from them.)
+		
+		An example of Raj's top 3 heroes: Dalai Lama, Nelson Mandela and Mother Teresa?
+		
+		Note that your heroes may be dead or alive, men or women—or even animals or plants. Indeed, they could even be cartoon characters!
+		They could also be a child. They needn’t be famous or powerful or rich. 
+	</p>
+	
+	<div id="herosContainer">
+
+     </div>
+
+     <input id="inputField" type="text" name="" placeholder="Enter Hero">
+     <button id="addInput">Add Hero</button>
+     
+    
+    
+ </div>
+
+<!--<a class="btn btn-primary active" id="merge_button" onclick="checkThreeChoices()">Continue</a>-->
+<a class="btn btn-primary active" id="merge_button" onclick="checkThreeChoices()">Continue</a>
+
+<% include ../../partials/footer/ %>
+
+<script>
+	var herosArray = [];
+
+
+	$("#merge_button").click(function(event){
+		herosArray = []
+        $(":checkbox:checked").each(function() {
+            herosArray.push($(this).next('label').text());
+        })
+        sessionStorage.setItem('herosArray', JSON.stringify(herosArray));
+        console.log(herosArray);
+    });
+	
+	$("#addInput").click(function(event) {
+		if($("#inputField").val() !== ''){
+			var newItem = $("#inputField").val();
+			$("#inputField").val("")
+			var id = newItem.slice(0, 5);
+			var input = document.createElement("div");
+			input.innerHTML = '<div id=' + id + 'Div>' + 
+			'<input type="checkbox" value=' + id + ' name="' + id + '" id=' + id + '" class="checkbox">' + 
+			'<label for=' + id + '>' +
+			newItem + '</label></div>'
+			$("#herosContainer").append(input)
+		}
+	})
+	
+	function checkThreeChoices(){
+    	if ($(":checkbox:checked").length !== 3){
+    		alert("Please Select Three Choices")
+    	}else{
+    		window.location.href = "/activities/herosValues"
+    	}
+    }
+	
+    
+</script>

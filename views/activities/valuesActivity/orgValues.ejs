@@ -1,0 +1,50 @@
+<% include ../../partials/header/ %>
+
+<div class="container">
+  
+	<h1>Activity 4: Page #5</h1>
+	
+	<p>If you were to thin of your organization as a person, what would this person’s core values be? 
+	To do this mental exercise, it may be useful to think of the more typical employee at your organization—someone who could serve as a mascot for it (typically, it’s the CEO or founder of the organization). 
+	Or you can base your assessment of the organization’s core values on the quality of your daily interactions with your coworkers</p>
+	
+	<div id="orgValues">
+
+     </div>
+
+     <input id="inputField" type="text" name="" placeholder="Enter Values of Organization" style="width: 250px">
+     <button id="addInput">Add Value</button>
+     <p></p>
+     
+    <button><a id="valuesAdded">Continue</a></button>
+    
+ </div>
+
+
+<% include ../../partials/footer/ %>
+
+
+<script>
+var orgValues = []
+
+    $("#addInput").click(function(event) {
+		if($("#inputField").val() !== ''){
+			var newItem = $("#inputField").val();
+			orgValues.push(newItem)
+			$("#inputField").val("")
+			var id = newItem.slice(0, 5);
+			$("#orgValues").append("<li>" + newItem + "</li>")
+		}
+	})
+	
+	$("#valuesAdded").click(function(){
+	    if(orgValues.length < 5){
+	        alert("Please list atleast 5 values")
+	    }else{
+	        sessionStorage.setItem('orgValues', JSON.stringify(orgValues));
+	        window.location.href ="/activities/valuesComparison"
+	    }
+	})
+	
+	
+</script>

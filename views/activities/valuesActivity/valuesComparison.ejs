@@ -1,0 +1,88 @@
+<% include ../../partials/header/ %>
+
+
+<div class="container">
+  
+	
+	<h1>Activity 4: Page #6</h1>
+	
+	<p>In this step, your task is to assess the alignment of your values with your organization’s core values. 
+		You can see two lists below: the first list—one the left—is your top set of core values. 
+		The second list—the one on the right—is your organization’s core values. 
+		If you believe your core values align a lot with your organization’s core values, you can indicate this by moving the circle that represents your “self” to the right—to be more overlapping with the organization’s core values. 
+		If you believe the opposite—that is, that your core values do not overlap much with your organization’s core values, you should move the circle that represents your “self” to the left. 
+	</p>
+	
+	<div class="row">
+		<div class="col-xs-6" id="chosenValues" style="margin-left: 100px">
+			<h4>Your Values</h4>
+		</div>
+		<div class="col-xs-6" id="orgValues" style="margin-left: 300px">
+			<h4>Organization Values</h4>
+		</div>
+	</div>
+	
+<section class="range-slider">
+	<h6 class="rangeValues"></h6>
+  <input value="25" min="0" max="100" step="1" type="range">
+  <input value="75" min="0" max="100" step="1" type="range">
+</section>
+
+	</div>
+	
+<% include ../../partials/footer/ %>
+
+<script>
+	var orgValues = JSON.parse(sessionStorage.getItem("orgValues"));
+	var chosenValues = JSON.parse(sessionStorage.getItem("chosenValues"));
+	var valuesDifference = 0;
+	
+	console.log(orgValues)
+	console.log(chosenValues)
+	
+	for(var i = 0; i < chosenValues.length; i++) { 
+		$("#chosenValues").append("<li>" + chosenValues[i] + "</li>")
+        }
+        
+    for(var i = 0; i < orgValues.length; i++) { 
+		$("#orgValues").append("<li>" + orgValues[i] + "</li>")
+    	
+    }
+    
+    
+    function getVals(){
+  // Get slider values
+  var parent = this.parentNode;
+  var slides = parent.getElementsByTagName("input");
+    var slide1 = parseFloat( slides[0].value );
+    var slide2 = parseFloat( slides[1].value );
+  // Neither slider will clip the other, so make sure we determine which is larger
+  if( slide1 > slide2 ){ var tmp = slide2; slide2 = slide1; slide1 = tmp; }
+  //if(slide1>50){
+  //	slide1*=-2
+  //}
+  
+  var displayElement = parent.getElementsByClassName("rangeValues")[0];
+      //displayElement.innerHTML = slide1 + " - " + slide2;
+      valuesDifference = 100 - (slide2 - slide1)*2;
+      displayElement.innerHTML = valuesDifference;
+      
+}
+
+
+window.onload = function(){
+  // Initialize Sliders
+  var sliderSections = document.getElementsByClassName("range-slider");
+      for( var x = 0; x < sliderSections.length; x++ ){
+        var sliders = sliderSections[x].getElementsByTagName("input");
+        for( var y = 0; y < sliders.length; y++ ){
+          if( sliders[y].type ==="range" ){
+            sliders[y].oninput = getVals;
+            // Manually trigger event first time to display values
+            sliders[y].oninput();
+          }
+        }
+      }
+}
+
+</script>

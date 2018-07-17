@@ -1,0 +1,55 @@
+<% include ../../partials/header/ %>
+
+<div class="container">
+	
+	<h1>Activity 4: Page #4 Choose Values</h1>
+	
+	<p>On the previous page, you listed some top qualities you admire in your heroes. Was it a coincidence that you admired these qualities? Or is it possible that you admire these qualities because they are super important to you? We think it’s the latter!
+Below, we have reproduced the list of qualities that you admire in your heroes:
+Please scan this list and check off the 5 most important qualities for you from this list. (You need to pick at least 3 qualities from the list.)
+</p>
+	
+	<div id="chosenValues">
+		
+	</div>
+	
+	
+    <button><a href="#" id="chosenValues" onclick="checkFiveChoices()">Continue</a></button>
+    
+ </div>
+
+
+<% include ../../partials/footer/ %>
+
+<script>
+var valuesArray = JSON.parse(sessionStorage.getItem("valuesArray"));
+var chosenValues = []
+
+for (var i = 0; i < valuesArray.length; i++) {
+	var newItem = valuesArray[i];
+    var id = newItem.slice(0, 5);
+	var input = document.createElement("div");
+	input.innerHTML = '<div id=' + id + 'Div>' + 
+	'<input type="checkbox" value=' + id + ' name="' + id + '" id=' + id + '" class="checkbox">' + 
+	'<label for=' + id + '>' +
+	newItem + '</label></div>'
+	$("#chosenValues").append(input)
+}
+
+$("#chosenValues").click(function(event){
+        chosenValues = []
+        $(":checkbox:checked").each(function() {
+            chosenValues.push($(this).next('label').text());
+        })
+        sessionStorage.setItem('chosenValues', JSON.stringify(chosenValues));
+    });
+    
+    function checkFiveChoices(){
+    	if ($(":checkbox:checked").length < 5){
+    		alert("Please Select Five Choices")
+    	}else{
+    		window.location.href = "/activities/orgValues"
+    	}
+    }
+
+</script>
